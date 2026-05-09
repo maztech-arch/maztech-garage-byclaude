@@ -8,115 +8,63 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Sarabun',sans-serif;background:#f0f4f8;color:#1a1a1a;display:flex;min-height:100vh}
-.sidebar{width:240px;min-height:100vh;background:linear-gradient(180deg,#0d1b3e 0%,#1a2a52 100%);color:#fff;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;transition:transform .3s}
-.logo-wrap{padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+
+/* SIDEBAR */
+.sidebar{width:240px;min-height:100vh;background:linear-gradient(180deg,#0d1b3e 0%,#1a2a52 100%);color:#fff;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100}
+.sidebar-logo{padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
 .logo-circle{width:40px;height:40px;background:#D0021B;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin-bottom:8px}
-.logo-name{font-size:15px;font-weight:700}.logo-sub{font-size:11px;opacity:.6;margin-top:2px}
+.logo-name{font-size:15px;font-weight:700}
+.logo-sub{font-size:11px;opacity:.6;margin-top:2px}
 .sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto}
-.nav-sec{font-size:10px;font-weight:700;opacity:.4;letter-spacing:.1em;text-transform:uppercase;padding:12px 10px 6px;color:rgba(180,200,255,0.8)}
+.nav-section{font-size:10px;font-weight:700;opacity:.4;letter-spacing:.1em;text-transform:uppercase;padding:12px 10px 6px;color:rgba(180,200,255,0.8)}
 .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(255,255,255,0.75);transition:all .15s;margin-bottom:2px}
 .nav-item:hover{background:rgba(255,255,255,0.1);color:#fff}
 .nav-item.active{background:rgba(255,255,255,0.18);color:#fff;border-left:3px solid #fff}
-.nav-icon{font-size:16px;width:20px;text-align:center}
-.nav-badge{margin-left:auto;background:#D0021B;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
-.sidebar-foot{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.1);font-size:11px;opacity:.5}
-.main{margin-left:240px;flex:1;display:flex;flex-direction:column}
+.nav-item .icon{font-size:16px;width:20px;text-align:center}
+.nav-badge{margin-left:auto;background:#D0021B;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.nav-disabled{opacity:.35;cursor:not-allowed}
+.sidebar-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;opacity:.5}
+
+/* MAIN */
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{background:#fff;border-bottom:1px solid #e3e8f0;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
-.topbar-l{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
-.topbar-l b{color:#0d1b3e}
-.topbar-r{display:flex;align-items:center;gap:10px}
+.topbar-left{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.topbar-left b{color:#0d1b3e}
+.topbar-right{display:flex;align-items:center;gap:10px}
 .date-badge{font-size:12px;background:#fde8ea;color:#D0021B;padding:4px 10px;border-radius:6px;font-weight:600}
-.btn{border:none;border-radius:8px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;transition:all .2s}
-.btn-red{background:#D0021B;color:#fff}.btn-red:hover{background:#a50015}
-.btn-blue{background:#0d1b3e;color:#fff}.btn-blue:hover{background:#1a2a52}
-.btn-outline{background:#fff;color:#0d1b3e;border:1px solid #c5cae9}.btn-outline:hover{background:#f0f4f8}
-.btn-green{background:#2e7d32;color:#fff}.btn-green:hover{background:#1b5e20}
-.btn-sm{padding:5px 12px;font-size:12px}
+.btn-add{background:#2e7d32;border:none;border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;color:#fff;font-family:'Sarabun',sans-serif;font-weight:600;margin-right:4px}
+.btn-add:hover{background:#1b5e20}
+.refresh-btn{background:#D0021B;border:none;border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;color:#fff;font-family:'Sarabun',sans-serif;font-weight:600}
 .content{padding:24px;flex:1}
 .page{display:none}.page.active{display:block}
-.ph{margin-bottom:20px;display:flex;align-items:flex-start;justify-content:space-between}
-.ph h2{font-size:22px;font-weight:700;color:#0d1b3e}
-.ph p{font-size:13px;color:#888;margin-top:3px}
-.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{background:#fff;border-radius:12px;padding:16px 18px;border:1px solid #e3e8f0;border-top:3px solid #0d1b3e;margin-bottom:14px}
+.page-header{margin-bottom:20px}
+.page-header h2{font-size:22px;font-weight:700;color:#0d1b3e}
+.page-header p{font-size:13px;color:#888;margin-top:3px}
+
+/* KPI */
 .kpi-grid{display:grid;gap:14px;margin-bottom:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.kpi{background:#fff;border-radius:12px;padding:16px 18px;border:1px solid #e3e8f0;border-top:3px solid #0d1b3e}
 .kpi .lbl{font-size:11px;color:#888;font-weight:600;margin-bottom:4px}
-.kpi .val{font-size:24px;font-weight:700;color:#0d1b3e}
+.kpi .val{font-size:22px;font-weight:700;color:#0d1b3e}
 .kpi .sub{font-size:11px;color:#aaa;margin-top:3px}
 .kpi.green{border-top-color:#2e7d32}.kpi.green .val{color:#2e7d32}
 .kpi.red{border-top-color:#c62828}.kpi.red .val{color:#c62828}
 .kpi.orange{border-top-color:#e65100}.kpi.orange .val{color:#e65100}
 .kpi.purple{border-top-color:#6a1b9a}.kpi.purple .val{color:#6a1b9a}
 .kpi.mazda{border-top-color:#D0021B}.kpi.mazda .val{color:#D0021B}
+
+/* SEC LABEL */
 .sec-label{font-size:11px;font-weight:700;color:#5c6bc0;letter-spacing:.08em;text-transform:uppercase;margin:20px 0 10px;display:flex;align-items:center;gap:6px}
 .sec-label::before{content:'';display:inline-block;width:3px;height:14px;background:#D0021B;border-radius:2px}
+
+/* CARD */
 .card{background:#fff;border-radius:12px;border:1px solid #e3e8f0;overflow:hidden}
-.card-hd{padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff}
-.tbl-wrap{overflow-x:auto;background:#fff;border-radius:12px;border:1px solid #e3e8f0}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#0d1b3e;color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:11px;white-space:nowrap}
-td{padding:9px 12px;border-bottom:1px solid #f0f4f8;vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#f8f9ff}
-.sbadge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;white-space:nowrap;cursor:pointer}
-.s-รับรถแล้ว{background:#e3f2fd;color:#1565c0}
-.s-กำลังซ่อม{background:#fff3e0;color:#e65100}
-.s-รอะไหล่{background:#fce4ec;color:#880e4f}
-.s-เสร็จแล้ว{background:#e8f5e9;color:#2e7d32}
-.s-พร้อมส่งมอบ{background:#f3e5f5;color:#6a1b9a}
-.s-ปิดแล้ว{background:#eceff1;color:#546e7a}
-.s-ยกเลิก{background:#ffebee;color:#b71c1c}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
-.filter-btn{font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid #c5cae9;background:#fff;cursor:pointer;color:#3949ab;font-weight:600;transition:all .2s;font-family:'Sarabun',sans-serif}
-.filter-btn.active,.filter-btn:hover{background:#D0021B;color:#fff;border-color:#D0021B}
-.search-box{padding:7px 12px;border-radius:8px;border:1px solid #c5cae9;font-size:12px;min-width:200px;font-family:'Sarabun',sans-serif}
-.kanban-scroll{overflow-x:auto;padding-bottom:8px}
-.kanban{display:flex;gap:10px;min-width:900px}
-.kol{flex:1;min-width:155px;background:#e8edf5;border-radius:10px;overflow:hidden}
-.kol-hd{padding:9px 12px;font-size:11px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:space-between}
-.kol-body{padding:7px;min-height:80px;max-height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:5px}
-.jcard{background:#fff;border-radius:7px;padding:9px 11px;border-left:3px solid #ccc;cursor:pointer;transition:all .15s}
-.jcard:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-.jcard.overdue{border-left-color:#c62828!important;background:#fff5f5}
-.jcard .jid{font-size:10px;color:#9fa8da;font-weight:700}
-.jcard .jname{font-size:12px;font-weight:700;color:#0d1b3e}
-.jcard .jinfo{font-size:11px;color:#666;margin-top:2px}
-.jcard .jdate{font-size:10px;color:#aaa;margin-top:3px}
-.ov-badge{font-size:9px;background:#c62828;color:#fff;padding:1px 5px;border-radius:3px}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}
-.modal-box{background:#fff;border-radius:16px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.modal-hd{background:#0d1b3e;color:#fff;padding:16px 20px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1}
-.modal-hd h3{font-size:15px;font-weight:700}
-.modal-close{background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0 4px}
-.modal-body{padding:20px}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.form-group{display:flex;flex-direction:column;gap:4px}
-.form-group.full{grid-column:1/-1}
-label{font-size:12px;font-weight:600;color:#555}
-input,select,textarea{padding:8px 12px;border:1px solid #c5cae9;border-radius:8px;font-size:13px;font-family:'Sarabun',sans-serif;color:#1a1a1a;transition:border .2s;background:#fff}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#D0021B;box-shadow:0 0 0 3px rgba(208,2,27,0.08)}
-textarea{resize:vertical;min-height:80px}
-.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:16px;border-top:1px solid #f0f4f8}
-.modal-sec{margin-bottom:16px}
-.modal-sec-title{font-size:11px;font-weight:700;color:#D0021B;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #f0f4f8}
-.mf{background:#f8f9fb;border-radius:8px;padding:8px 12px}
-.mf .ml{font-size:10px;color:#aaa;font-weight:600}
-.mf .mv{font-size:13px;font-weight:600;color:#0d1b3e;margin-top:1px}
-.modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.alert{border-radius:8px;padding:12px 16px;font-size:13px;margin:8px 0;display:flex;align-items:center;gap:8px;font-weight:600;border-left:4px solid}
-.alert-ok{background:#e8f5e9;color:#1b5e20;border-color:#2e7d32}
-.alert-warn{background:#fff3e0;color:#e65100;border-color:#e65100}
-.alert-err{background:#ffebee;color:#c62828;border-color:#c62828}
-.prog-wrap{margin:14px 0}
-.prog-lbl{display:flex;justify-content:space-between;font-size:12px;color:#5c6bc0;margin-bottom:6px;font-weight:600}
-.prog-bar{height:10px;background:#e8eaf6;border-radius:5px;overflow:hidden}
-.prog-fill{height:100%;border-radius:5px;transition:width .8s ease}
-.fg{background:linear-gradient(90deg,#2e7d32,#43a047)}
-.fw{background:linear-gradient(90deg,#e65100,#ef6c00)}
-.fr{background:linear-gradient(90deg,#c62828,#e53935)}
+.ch{padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff}
+
+/* BANK */
 .bank-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid #f0f4f8}
 .bank-row:last-child{border-bottom:none}
 .bank-left{display:flex;align-items:center;gap:10px}
@@ -124,131 +72,297 @@ textarea{resize:vertical;min-height:80px}
 .bank-name{font-size:14px;font-weight:700;color:#0d1b3e}
 .bank-desc{font-size:11px;color:#9fa8da}
 .bank-amt{font-size:15px;font-weight:700}
+.bank-note{font-size:10px;color:#aaa;margin-top:2px}
 .bank-total{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:#e8eaf6;border-top:2px solid #D0021B}
+.bank-total-lbl{font-size:14px;font-weight:700;color:#0d1b3e}
+.bank-total-amt{font-size:22px;font-weight:700;color:#0d1b3e}
+
+/* DIV ROW */
 .div-row{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid #f0f4f8}
 .div-row:last-child{border-bottom:none}
 .div-lbl{font-size:13px;color:#555;font-weight:600}
 .div-amt{font-size:15px;font-weight:700}
 .div-amt.g{color:#2e7d32}.div-amt.b{color:#1565c0}
-.dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+
+/* PARTNER */
 .partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.p-card{background:#fff;border-radius:10px;border:1px solid #e3e8f0;padding:16px;text-align:center;border-top:3px solid #D0021B}
+.partner-card{background:#fff;border-radius:10px;border:1px solid #e3e8f0;padding:16px;text-align:center;border-top:3px solid #D0021B}
 .p-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:15px;font-weight:700;border:2px solid}
 .p-name{font-size:13px;font-weight:700;color:#0d1b3e;margin-bottom:3px}
+.p-pct{font-size:11px;color:#9fa8da;margin-bottom:4px}
 .p-amt{font-size:17px;font-weight:700;color:#2e7d32}
+
+/* PROGRESS */
+.prog-wrap{margin:14px 0}
+.prog-lbl{display:flex;justify-content:space-between;font-size:12px;color:#5c6bc0;margin-bottom:6px;font-weight:600}
+.prog-bar{height:10px;background:#e8eaf6;border-radius:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:5px;transition:width .8s ease}
+.fg{background:linear-gradient(90deg,#2e7d32,#43a047)}
+.fw{background:linear-gradient(90deg,#e65100,#ef6c00)}
+.fr{background:linear-gradient(90deg,#c62828,#e53935)}
+
+/* ALERT */
+.alert{border-radius:8px;padding:12px 16px;font-size:13px;margin:8px 0;display:flex;align-items:center;gap:8px;font-weight:600;border-left:4px solid}
+.alert-ok{background:#e8f5e9;color:#1b5e20;border-color:#2e7d32}
+.alert-warn{background:#fff3e0;color:#e65100;border-color:#e65100}
+
+/* KANBAN */
+.kanban-scroll{overflow-x:auto;padding-bottom:8px}
+.kanban{display:flex;gap:10px;min-width:800px}
+.kol{flex:1;min-width:150px;background:#e8edf5;border-radius:10px;overflow:hidden}
+.kol-header{padding:9px 12px;font-size:11px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.kol-body{padding:7px;min-height:100px;display:flex;flex-direction:column;gap:5px;max-height:400px;overflow-y:auto}
+.job-card{background:#fff;border-radius:7px;padding:9px 11px;border-left:3px solid #ccc}
+.job-card .jid{font-size:10px;color:#9fa8da;font-weight:700}
+.job-card .jname{font-size:12px;font-weight:700;color:#0d1b3e}
+.job-card .jinfo{font-size:11px;color:#666;margin-top:2px}
+.job-card .jdate{font-size:10px;color:#aaa;margin-top:3px}
+.job-card.overdue{border-left-color:#c62828!important;background:#fff5f5}
+.overdue-badge{font-size:9px;background:#c62828;color:#fff;padding:1px 5px;border-radius:3px}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;background:#fff;border-radius:12px;border:1px solid #e3e8f0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#0d1b3e;color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:11px;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #f0f4f8;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8f9ff}
+
+/* STATUS BADGE */
+.sbadge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;white-space:nowrap}
+.s-รับรถแล้ว{background:#e3f2fd;color:#1565c0}
+.s-กำลังซ่อม{background:#fff3e0;color:#e65100}
+.s-รอะไหล่{background:#fce4ec;color:#880e4f}
+.s-เสร็จแล้ว{background:#e8f5e9;color:#2e7d32}
+.s-พร้อมส่งมอบ{background:#f3e5f5;color:#6a1b9a}
+.s-ปิดแล้ว{background:#eceff1;color:#546e7a}
+.s-ยกเลิก,.s-CANCLE{background:#ffebee;color:#b71c1c}
+
+/* FILTER */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.filter-btn{font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid #c5cae9;background:#fff;cursor:pointer;color:#3949ab;font-weight:600;transition:all .2s;font-family:'Sarabun',sans-serif}
+.filter-btn.active,.filter-btn:hover{background:#D0021B;color:#fff;border-color:#D0021B}
+.search-box{padding:7px 12px;border-radius:8px;border:1px solid #c5cae9;font-size:12px;min-width:200px;font-family:'Sarabun',sans-serif}
+
+/* CUSTOMER */
+.tab-bar{display:flex;gap:0;margin-bottom:16px;background:#f0f4f8;border-radius:10px;padding:4px}
+.tab-btn{flex:1;padding:8px 16px;border:none;background:transparent;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:#888;font-family:'Sarabun',sans-serif;transition:all .2s}
+.tab-btn.active{background:#fff;color:#0d1b3e;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
 .cust-card{background:#fff;border-radius:12px;border:1px solid #e3e8f0;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:all .2s;margin-bottom:8px}
 .cust-card:hover{border-color:#D0021B;box-shadow:0 2px 8px rgba(208,2,27,0.08)}
 .cust-avatar{width:42px;height:42px;border-radius:50%;background:#fde8ea;color:#D0021B;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cust-name{font-size:14px;font-weight:700;color:#0d1b3e}
+.cust-meta{font-size:12px;color:#888;margin-top:2px}
+.cust-tags{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
 .ctag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px}
 .tag-active{background:#e8f5e9;color:#2e7d32}
 .tag-vip{background:#fff3e0;color:#e65100}
 .tag-biz{background:#e8eaf6;color:#3949ab}
+.cust-right{text-align:right;flex-shrink:0;margin-left:auto}
+.cust-spend{font-size:14px;font-weight:700;color:#0d1b3e}
+.cust-visit{font-size:10px;color:#aaa}
 .car-card{background:#fff;border-radius:12px;border:1px solid #e3e8f0;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s}
 .car-card:hover{border-color:#D0021B}
-.tab-bar{display:flex;gap:0;margin-bottom:16px;background:#f0f4f8;border-radius:10px;padding:4px}
-.tab-btn{flex:1;padding:8px 16px;border:none;background:transparent;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:#888;font-family:'Sarabun',sans-serif;transition:all .2s}
-.tab-btn.active{background:#fff;color:#0d1b3e;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.car-plate{font-size:16px;font-weight:700;color:#0d1b3e}
+.car-model{font-size:12px;color:#666;margin-top:2px}
+.car-details{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.car-di{font-size:11px;color:#888}
+.car-di b{display:block;font-size:13px;font-weight:700;color:#0d1b3e;margin-top:1px}
+.cstatus{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px}
+.cs-on{background:#e8f5e9;color:#2e7d32}
+.cs-off{background:#eceff1;color:#546e7a}
+
+/* MODAL */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:#fff;border-radius:16px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}
+.modal-hd{background:#0d1b3e;color:#fff;padding:16px 20px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.modal-hd h3{font-size:15px;font-weight:700}
+.modal-close{background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer}
+.modal-body{padding:20px}
+.modal-sec{margin-bottom:16px}
+.modal-sec-title{font-size:11px;font-weight:700;color:#D0021B;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #f0f4f8}
+.modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.mf{background:#f8f9fb;border-radius:8px;padding:8px 12px}
+.mf .ml{font-size:10px;color:#aaa;font-weight:600}
+.mf .mv{font-size:13px;font-weight:600;color:#0d1b3e;margin-top:1px}
+.hist-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8}
+.hist-item:last-child{border-bottom:none}
+.hist-dot{width:8px;height:8px;border-radius:50%;background:#D0021B;flex-shrink:0}
+.hist-info{flex:1}
+.hist-date{font-size:11px;color:#aaa}
+.hist-desc{font-size:13px;font-weight:600;color:#0d1b3e}
+.hist-amt{font-size:13px;font-weight:700;color:#2e7d32}
+
+/* CALENDAR */
+.view-toggle{display:flex;gap:8px;margin-bottom:14px}
+.view-btn{padding:6px 16px;border-radius:8px;border:1px solid #c5cae9;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:#3949ab;font-family:'Sarabun',sans-serif;transition:all .2s}
+.view-btn.active{background:#D0021B;color:#fff;border-color:#D0021B}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-nav-btn{background:#fff;border:1px solid #e3e8f0;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:600;color:#0d1b3e;font-family:'Sarabun',sans-serif}
+.cal-title{font-size:16px;font-weight:700;color:#0d1b3e}
+.cal-grid{background:#fff;border-radius:12px;border:1px solid #e3e8f0;overflow:hidden}
+.cal-header{display:grid;grid-template-columns:repeat(7,1fr);background:#0d1b3e}
+.cal-dow{padding:10px 4px;text-align:center;font-size:11px;font-weight:700;color:#fff}
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-cell{min-height:90px;padding:6px;border-right:1px solid #f0f4f8;border-bottom:1px solid #f0f4f8}
+.cal-cell.other-month{background:#f8f9fb}
+.cal-cell.today{background:#fff9f9}
+.cal-day-num{font-size:12px;font-weight:700;color:#555;margin-bottom:3px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cal-cell.today .cal-day-num{background:#D0021B;color:#fff}
+.cal-cell.other-month .cal-day-num{color:#ccc}
+.cal-ev{font-size:10px;font-weight:600;padding:2px 5px;border-radius:4px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.ev-Confirmed{background:#e8f5e9;color:#2e7d32;border-left:2px solid #2e7d32}
+.ev-Pending{background:#fff3e0;color:#e65100;border-left:2px solid #e65100}
+.ev-Cancelled{background:#ffebee;color:#c62828;border-left:2px solid #c62828}
+.ev-Completed{background:#e8eaf6;color:#3949ab;border-left:2px solid #3949ab}
+.cal-more{font-size:10px;color:#888;cursor:pointer}
 .tl-card{background:#fff;border-radius:10px;border:1px solid #e3e8f0;padding:14px 18px;display:flex;align-items:center;gap:16px;border-left:4px solid #D0021B;margin-bottom:8px}
 .tl-time{min-width:80px;text-align:center;font-size:13px;font-weight:700;color:#0d1b3e}
-.tl-div{width:1px;height:40px;background:#e3e8f0}
+.tl-divider{width:1px;height:40px;background:#e3e8f0}
+.tl-info{flex:1}
+.tl-name{font-size:14px;font-weight:700;color:#0d1b3e}
+.tl-detail{font-size:12px;color:#888;margin-top:2px}
 .abadge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px}
 .ab-Confirmed{background:#e8f5e9;color:#2e7d32}
 .ab-Pending{background:#fff3e0;color:#e65100}
 .ab-Cancelled{background:#ffebee;color:#c62828}
 .ab-Completed{background:#e8eaf6;color:#3949ab}
-.hist-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f4f8}
-.hist-item:last-child{border-bottom:none}
-.hist-dot{width:8px;height:8px;border-radius:50%;background:#D0021B;flex-shrink:0}
-.toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;transform:translateY(100px);transition:transform .3s ease;max-width:320px}
-.toast.show{transform:translateY(0)}
-.toast.success{background:#2e7d32}
-.toast.error{background:#c62828}
-.loading{display:flex;align-items:center;justify-content:center;padding:40px;color:#aaa;font-size:13px;gap:8px}
-.spinner{width:20px;height:20px;border:2px solid #e8eaf6;border-top-color:#D0021B;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:32px;color:#aaa;font-size:13px}
-.footer{text-align:center;font-size:11px;color:#9fa8da;padding:16px 0}
-.realtime-dot{width:8px;height:8px;border-radius:50%;background:#2e7d32;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.cf-row{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid #f0f4f8}
-.cf-row:last-child{border-bottom:none}
-.cf-row.income .cf-amt{color:#2e7d32;font-weight:700}
-.cf-row.expense .cf-amt{color:#c62828;font-weight:700}
-.cf-cat{font-size:12px;color:#888;margin-top:2px}
-.cf-note{font-size:11px;color:#aaa;margin-top:1px}
-@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.mobile-open{transform:translateX(0)}.main{margin-left:0}.g4{grid-template-columns:repeat(2,1fr)}.partner-grid{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
+.no-appt{text-align:center;padding:24px;color:#aaa;font-size:13px;background:#fff;border-radius:10px;border:1px dashed #e3e8f0}
+
+/* MISC */
+.dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.err{background:#ffebee;color:#b71c1c;border-radius:8px;padding:12px 16px;font-size:13px;margin:8px 0;border-left:4px solid #c62828}
+.empty{text-align:center;padding:24px;color:#aaa;font-size:13px}
+.footer{text-align:center;font-size:11px;color:#9fa8da;padding:16px 0 8px}
+.tooltip{position:fixed;background:#1a1a1a;color:#fff;padding:10px 14px;border-radius:8px;font-size:12px;z-index:9999;max-width:220px;line-height:1.6;pointer-events:none;display:none}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0}.g4{grid-template-columns:repeat(2,1fr)}.partner-grid{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="tooltip" id="tooltip"></div>
 
-<div class="sidebar" id="sidebar">
-  <div class="logo-wrap">
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
     <div class="logo-circle">MZ</div>
     <div class="logo-name">Maztech Garage</div>
-    <div class="logo-sub"><span class="realtime-dot"></span>ระบบจัดการอู่ซ่อม Mazda</div>
+    <div class="logo-sub">ระบบจัดการอู่ซ่อม Mazda</div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-sec">หลัก</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="navTo('dashboard')"><span class="nav-icon">📊</span>Dashboard</div>
-    <div class="nav-sec">งานซ่อม</div>
-    <div class="nav-item" id="nav-jobs" onclick="navTo('jobs')"><span class="nav-icon">🔧</span>งานซ่อม<span class="nav-badge" id="badge-jobs">0</span></div>
-    <div class="nav-item" id="nav-cashflow" onclick="navTo('cashflow')"><span class="nav-icon">💰</span>รายรับ-รายจ่าย</div>
-    <div class="nav-item" id="nav-appointments" onclick="navTo('appointments')"><span class="nav-icon">📅</span>ตารางนัดคิว<span class="nav-badge" id="badge-appt">0</span></div>
-    <div class="nav-item" id="nav-customers" onclick="navTo('customers')"><span class="nav-icon">👥</span>ลูกค้า / รถ</div>
+    <div class="nav-section">หลัก</div>
+    <div class="nav-item active" id="nav-dashboard" onclick="navTo('dashboard')"><span class="icon">📊</span> Dashboard</div>
+    <div class="nav-section">งานซ่อม</div>
+    <div class="nav-item" id="nav-jobs" onclick="navTo('jobs')"><span class="icon">🔧</span> งานซ่อมทั้งหมด<span class="nav-badge" id="badge-jobs">0</span></div>
+    <div class="nav-item" id="nav-finance" onclick="navTo('finance')"><span class="icon">💰</span> การเงิน</div>
+    <div class="nav-item" id="nav-appointments" onclick="navTo('appointments')"><span class="icon">📅</span> ตารางนัดคิว<span class="nav-badge" id="badge-appt">0</span></div>
+    <div class="nav-item" id="nav-customers" onclick="navTo('customers')"><span class="icon">👥</span> ลูกค้า / รถ</div>
+    <div class="nav-section">เร็วๆ นี้</div>
+    <div class="nav-item nav-disabled"><span class="icon">📦</span> อะไหล่ / คลัง</div>
+    <div class="nav-item nav-disabled"><span class="icon">📈</span> รายงาน</div>
   </nav>
-  <div class="sidebar-foot">Maztech Garage © 2569 | Firebase RT</div>
+  <div class="sidebar-footer">MazTech Garage © 2569</div>
 </div>
 
+<!-- MAIN -->
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l">
-      <button onclick="document.getElementById('sidebar').classList.toggle('mobile-open')" style="background:none;border:none;cursor:pointer;font-size:18px;display:none" id="menu-btn">☰</button>
-      Maztech › <b id="page-title">Dashboard</b>
-    </div>
-    <div class="topbar-r">
+    <div class="topbar-left">Maztech Garage › <b id="page-title">Dashboard</b></div>
+    <div class="topbar-right">
       <span class="date-badge" id="today-date">—</span>
-      <button class="btn btn-red btn-sm" onclick="loadAll()">↻ รีเฟรช</button>
+      <button class="btn-add" id="tb-add" style="display:none" onclick="tbAdd()">+ เพิ่ม</button>
+      <button class="refresh-btn" onclick="loadAll()">↻ รีเฟรช</button>
     </div>
   </div>
   <div class="content">
     <div id="err-zone"></div>
 
-    <!-- ===== DASHBOARD ===== -->
+    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="ph"><div><h2>สวัสดี, Maztech Garage 👋</h2><p id="dash-sub">กำลังโหลดข้อมูล...</p></div></div>
+      <div class="page-header"><h2>สวัสดี, Maztech Garage 👋</h2><p id="dash-sub">ภาพรวมระบบ</p></div>
       <div class="kpi-grid g4">
-        <div class="kpi green"><div class="lbl">รายรับเดือนนี้</div><div class="val" id="d-rev">—</div></div>
+        <div class="kpi green"><div class="lbl">เงินสดรวมทั้งหมด</div><div class="val" id="d-bank">—</div><div class="sub">3 บัญชี</div></div>
+        <div class="kpi"><div class="lbl">รายรับเดือนนี้</div><div class="val" id="d-rev">—</div></div>
         <div class="kpi red"><div class="lbl">รายจ่ายเดือนนี้</div><div class="val" id="d-exp">—</div></div>
-        <div class="kpi orange"><div class="lbl">รถกำลังซ่อม</div><div class="val" id="d-jobs">—</div><div class="sub">รอ+ซ่อม+รออะไหล่</div></div>
+        <div class="kpi orange"><div class="lbl">รถกำลังซ่อม</div><div class="val" id="d-active">—</div><div class="sub">รอ+ซ่อม+รออะไหล่</div></div>
+      </div>
+      <div class="kpi-grid g4">
+        <div class="kpi purple"><div class="lbl">รออะไหล่</div><div class="val" id="d-wait">—</div></div>
+        <div class="kpi green"><div class="lbl">พร้อมส่งมอบ</div><div class="val" id="d-ready">—</div></div>
+        <div class="kpi red"><div class="lbl">ค้างเกิน 3 วัน</div><div class="val" id="d-over">—</div></div>
         <div class="kpi mazda"><div class="lbl">นัดวันนี้</div><div class="val" id="d-appt">—</div></div>
       </div>
-      <div class="kpi-grid g4">
-        <div class="kpi"><div class="lbl">รถพร้อมส่งมอบ</div><div class="val" id="d-ready">—</div></div>
-        <div class="kpi red"><div class="lbl">ค้างเกิน 3 วัน</div><div class="val" id="d-over">—</div></div>
-        <div class="kpi green"><div class="lbl">กำไรสุทธิเดือนนี้</div><div class="val" id="d-profit">—</div></div>
-        <div class="kpi"><div class="lbl">ลูกค้าทั้งหมด</div><div class="val" id="d-custs">—</div></div>
-      </div>
       <div id="d-alert"></div>
-      <div class="dash-2col">
+      <div class="dash-2col" style="margin-top:16px">
         <div>
-          <div class="sec-label">งานซ่อมล่าสุด</div>
-          <div class="tbl-wrap"><table><thead><tr><th>Job ID</th><th>ลูกค้า</th><th>ทะเบียน</th><th>สถานะ</th></tr></thead><tbody id="d-job-recent"></tbody></table></div>
+          <div class="sec-label">ยอดเงินในบัญชี</div>
+          <div class="card">
+            <div class="ch" style="background:#0d1b3e">ยอดคงเหลือ 3 บัญชี</div>
+            <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#2e7d32"></div><div><div class="bank-name">KBank-051</div><div class="bank-desc">รายจ่าย</div></div></div><div class="bank-amt" id="d-b051">—</div></div>
+            <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#1565c0"></div><div><div class="bank-name">KBank-225</div><div class="bank-desc">รายรับ</div></div></div><div class="bank-amt" id="d-b225">—</div></div>
+            <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#e65100"></div><div><div class="bank-name">SCB</div><div class="bank-desc">สำรอง</div></div></div><div class="bank-amt" id="d-bscb">—</div></div>
+            <div class="bank-total"><span class="bank-total-lbl">รวมทั้งหมด</span><span class="bank-total-amt" id="d-btotal">—</span></div>
+          </div>
         </div>
         <div>
-          <div class="sec-label">นัดวันนี้</div>
-          <div id="d-appt-today"><div class="empty">ไม่มีนัดวันนี้</div></div>
+          <div class="sec-label">กำไรและปันผล</div>
+          <div class="card">
+            <div class="ch" style="background:#D0021B">การกระจายกำไรเดือนนี้</div>
+            <div class="div-row"><span class="div-lbl">กำไรสุทธิ</span><span class="div-amt" id="d-profit">—</span></div>
+            <div class="div-row"><span class="div-lbl">ค่าใช้จ่ายคงที่</span><span class="div-amt" id="d-fixed">—</span></div>
+            <div class="div-row"><span class="div-lbl">เงินสำรอง 30%</span><span class="div-amt" id="d-res">—</span></div>
+            <div class="div-row"><span class="div-lbl">เงินพร้อมปันผล</span><span class="div-amt g" id="d-divr">—</span></div>
+            <div class="div-row"><span class="div-lbl">ปันผลต่อคน (25%)</span><span class="div-amt b" id="d-divp">—</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ===== JOBS ===== -->
-    <div class="page" id="page-jobs">
-      <div class="ph">
-        <div><h2>🔧 งานซ่อม</h2><p>Kanban Board และรายการงานซ่อมทั้งหมด</p></div>
-        <button class="btn btn-red" onclick="openModal('job-add')">+ เปิดงานใหม่</button>
+    <!-- FINANCE -->
+    <div class="page" id="page-finance">
+      <div class="page-header"><h2>💰 การเงิน</h2><p>รายรับ รายจ่าย กำไร และยอดเงินในบัญชี</p></div>
+      <div class="kpi-grid g2">
+        <div class="kpi green"><div class="lbl">รายรับวันนี้</div><div class="val" id="f-rt">—</div><div class="sub">KBank-225</div></div>
+        <div class="kpi red"><div class="lbl">รายจ่ายวันนี้</div><div class="val" id="f-et">—</div><div class="sub">KBank-051</div></div>
       </div>
+      <div class="kpi-grid g3">
+        <div class="kpi green"><div class="lbl">รายรับเดือนนี้</div><div class="val" id="f-rm">—</div></div>
+        <div class="kpi red"><div class="lbl">รายจ่ายเดือนนี้</div><div class="val" id="f-em">—</div></div>
+        <div class="kpi" id="f-pm-card"><div class="lbl">กำไรสุทธิ</div><div class="val" id="f-pm">—</div></div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-lbl"><span>รายรับเทียบ Break-even (68,000 ฿)</span><span id="f-bepct">—</span></div>
+        <div class="prog-bar"><div class="prog-fill" id="f-bebar" style="width:0%"></div></div>
+      </div>
+      <div id="f-alert"></div>
+      <div class="sec-label">ยอดเงินในบัญชี</div>
+      <div class="card">
+        <div class="ch" style="background:#0d1b3e">ยอดคงเหลือ 3 บัญชี (Running Balance)</div>
+        <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#2e7d32"></div><div><div class="bank-name">KBank-051</div><div class="bank-desc">รายจ่าย (หลัก)</div></div></div><div style="text-align:right"><div class="bank-amt" id="f-b051">—</div><div class="bank-note">Running Balance ล่าสุด</div></div></div>
+        <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#1565c0"></div><div><div class="bank-name">KBank-225</div><div class="bank-desc">รายรับ (หลัก)</div></div></div><div style="text-align:right"><div class="bank-amt" id="f-b225">—</div><div class="bank-note">Running Balance ล่าสุด</div></div></div>
+        <div class="bank-row"><div class="bank-left"><div class="bank-dot" style="background:#e65100"></div><div><div class="bank-name">SCB</div><div class="bank-desc">สำรอง</div></div></div><div style="text-align:right"><div class="bank-amt" id="f-bscb">—</div><div class="bank-note">Running Balance ล่าสุด</div></div></div>
+        <div class="bank-total"><span class="bank-total-lbl">รวมเงินสดทั้งหมด</span><span class="bank-total-amt" id="f-btot">—</span></div>
+      </div>
+      <div class="sec-label">เงินสำรองและปันผล</div>
+      <div class="card">
+        <div class="ch" style="background:#D0021B">การกระจายกำไร</div>
+        <div class="div-row"><span class="div-lbl">ค่าใช้จ่ายคงที่</span><span class="div-amt" id="f-fc">—</span></div>
+        <div class="div-row"><span class="div-lbl">เงินสำรอง 30%</span><span class="div-amt" id="f-r30">—</span></div>
+        <div class="div-row"><span class="div-lbl">เงินพร้อมปันผล</span><span class="div-amt g" id="f-rdiv">—</span></div>
+      </div>
+      <div class="sec-label">ปันผลพาร์ทเนอร์ (25% ต่อคน)</div>
+      <div class="partner-grid">
+        <div class="partner-card"><div class="p-avatar" style="background:#e8eaf6;color:#0d1b3e;border-color:#c5cae9">ออย</div><div class="p-name">ออย</div><div class="p-pct">25%</div><div class="p-amt" id="f-dp1">—</div></div>
+        <div class="partner-card"><div class="p-avatar" style="background:#fce4ec;color:#880e4f;border-color:#f48fb1">โอ้</div><div class="p-name">โอ้</div><div class="p-pct">25%</div><div class="p-amt" id="f-dp2">—</div></div>
+        <div class="partner-card"><div class="p-avatar" style="background:#e8f5e9;color:#1b5e20;border-color:#a5d6a7">กาย</div><div class="p-name">กาย</div><div class="p-pct">25%</div><div class="p-amt" id="f-dp3">—</div></div>
+        <div class="partner-card"><div class="p-avatar" style="background:#fff8e1;color:#e65100;border-color:#ffe082">พง</div><div class="p-name">พง</div><div class="p-pct">25%</div><div class="p-amt" id="f-dp4">—</div></div>
+      </div>
+    </div>
+
+    <!-- JOBS -->
+    <div class="page" id="page-jobs">
+      <div class="page-header"><h2>🔧 งานซ่อมทั้งหมด</h2><p>Kanban Board และรายการงานซ่อม</p></div>
       <div class="kpi-grid g4">
-        <div class="kpi orange"><div class="lbl">กำลังดำเนินการ</div><div class="val" id="j-act">—</div></div>
+        <div class="kpi orange"><div class="lbl">กำลังดำเนินการ</div><div class="val" id="j-act">—</div><div class="sub">รับรถ+ซ่อม+รออะไหล่</div></div>
         <div class="kpi purple"><div class="lbl">พร้อมส่งมอบ</div><div class="val" id="j-rdy">—</div></div>
         <div class="kpi red"><div class="lbl">ค้างเกิน 3 วัน</div><div class="val" id="j-ovd">—</div></div>
         <div class="kpi green"><div class="lbl">ปิดเดือนนี้</div><div class="val" id="j-cls">—</div></div>
@@ -257,74 +371,59 @@ textarea{resize:vertical;min-height:80px}
       <div class="kanban-scroll"><div class="kanban" id="kanban-board"></div></div>
       <div class="sec-label">รายการทั้งหมด</div>
       <div class="filter-bar">
-        <input class="search-box" id="j-search" placeholder="ค้นหา Job ID / ลูกค้า / ทะเบียน..." oninput="renderJobTable()">
-        <button class="filter-btn active" onclick="setJF('all',this)">ทั้งหมด</button>
-        <button class="filter-btn" onclick="setJF('รับรถแล้ว',this)">รับรถแล้ว</button>
-        <button class="filter-btn" onclick="setJF('กำลังซ่อม',this)">กำลังซ่อม</button>
-        <button class="filter-btn" onclick="setJF('รอะไหล่',this)">รอะไหล่</button>
-        <button class="filter-btn" onclick="setJF('เสร็จแล้ว',this)">เสร็จแล้ว</button>
-        <button class="filter-btn" onclick="setJF('พร้อมส่งมอบ',this)">พร้อมส่งมอบ</button>
-        <button class="filter-btn" onclick="setJF('ปิดแล้ว',this)">ปิดแล้ว</button>
+        <input class="search-box" id="j-search" placeholder="ค้นหาชื่อ / ทะเบียน / Job ID..." oninput="renderJobTable()">
+        <button class="filter-btn active" onclick="setJFilter('all',this)">ทั้งหมด</button>
+        <button class="filter-btn" onclick="setJFilter('รับรถแล้ว',this)">รับรถแล้ว</button>
+        <button class="filter-btn" onclick="setJFilter('กำลังซ่อม',this)">กำลังซ่อม</button>
+        <button class="filter-btn" onclick="setJFilter('รอะไหล่',this)">รอะไหล่</button>
+        <button class="filter-btn" onclick="setJFilter('เสร็จแล้ว',this)">เสร็จแล้ว</button>
+        <button class="filter-btn" onclick="setJFilter('พร้อมส่งมอบ',this)">พร้อมส่งมอบ</button>
+        <button class="filter-btn" onclick="setJFilter('ปิดแล้ว',this)">ปิดแล้ว</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>Job ID</th><th>วันรับรถ</th><th>ลูกค้า</th><th>โทร</th><th>ทะเบียน</th><th>รุ่น</th><th>ปัญหา</th><th>สถานะ</th><th>ค้างวัน</th><th>ยอด (฿)</th><th>จัดการ</th></tr></thead><tbody id="job-table"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Job ID</th><th>RE_No</th><th>วันรับรถ</th><th>ลูกค้า</th><th>ทะเบียน</th><th>รุ่น</th><th>ปัญหา</th><th>สถานะ</th><th>ค้างวัน</th><th>ยอด</th></tr></thead><tbody id="job-table"></tbody></table></div>
     </div>
 
-    <!-- ===== CASHFLOW ===== -->
-    <div class="page" id="page-cashflow">
-      <div class="ph">
-        <div><h2>💰 รายรับ-รายจ่าย</h2><p>บันทึกรายการรายรับและรายจ่ายประจำวัน</p></div>
-        <button class="btn btn-red" onclick="openModal('cf-add')">+ บันทึกรายการ</button>
-      </div>
-      <div class="kpi-grid g3">
-        <div class="kpi green"><div class="lbl">รายรับเดือนนี้</div><div class="val" id="cf-rev">—</div></div>
-        <div class="kpi red"><div class="lbl">รายจ่ายเดือนนี้</div><div class="val" id="cf-exp">—</div></div>
-        <div class="kpi" id="cf-profit-card"><div class="lbl">กำไรสุทธิ</div><div class="val" id="cf-profit">—</div></div>
-      </div>
-      <div class="prog-wrap">
-        <div class="prog-lbl"><span>รายรับเทียบ Break-even (68,000 ฿)</span><span id="cf-bepct">—</span></div>
-        <div class="prog-bar"><div class="prog-fill" id="cf-bebar" style="width:0%"></div></div>
-      </div>
-      <div id="cf-alert"></div>
-      <div class="sec-label">รายการล่าสุด</div>
-      <div class="filter-bar">
-        <button class="filter-btn active" onclick="setCFF('all',this)">ทั้งหมด</button>
-        <button class="filter-btn" onclick="setCFF('รายรับ',this)">รายรับ</button>
-        <button class="filter-btn" onclick="setCFF('รายจ่าย',this)">รายจ่าย</button>
-      </div>
-      <div class="tbl-wrap"><table><thead><tr><th>วันที่</th><th>ประเภท</th><th>หมวด</th><th>รายละเอียด</th><th>บัญชี</th><th>จำนวน (฿)</th><th>จัดการ</th></tr></thead><tbody id="cf-table"></tbody></table></div>
-    </div>
-
-    <!-- ===== APPOINTMENTS ===== -->
+    <!-- APPOINTMENTS -->
     <div class="page" id="page-appointments">
-      <div class="ph">
-        <div><h2>📅 ตารางนัดคิว</h2><p>รายการนัดหมายทั้งหมด</p></div>
-        <button class="btn btn-red" onclick="openModal('appt-add')">+ เพิ่มนัด</button>
-      </div>
+      <div class="page-header"><h2>📅 ตารางนัดคิว</h2><p>รายการนัดหมายทั้งหมด</p></div>
       <div class="kpi-grid g4">
         <div class="kpi mazda"><div class="lbl">นัดวันนี้</div><div class="val" id="a-today">—</div></div>
         <div class="kpi orange"><div class="lbl">พรุ่งนี้</div><div class="val" id="a-tom">—</div></div>
         <div class="kpi green"><div class="lbl">ยืนยันแล้ว</div><div class="val" id="a-conf">—</div></div>
         <div class="kpi red"><div class="lbl">รอยืนยัน</div><div class="val" id="a-pend">—</div></div>
       </div>
-      <div class="sec-label">นัดวันนี้</div>
-      <div id="a-timeline"><div class="empty">ไม่มีนัดวันนี้</div></div>
-      <div class="sec-label">รายการทั้งหมด</div>
+      <div class="view-toggle">
+        <button class="view-btn active" onclick="setApptView('timeline',this)">📋 Timeline วันนี้</button>
+        <button class="view-btn" onclick="setApptView('calendar',this)">📅 ปฏิทินรายเดือน</button>
+        <button class="view-btn" onclick="setApptView('week',this)">📆 รายสัปดาห์</button>
+      </div>
+      <div id="view-timeline">
+        <div class="sec-label">นัดวันนี้</div>
+        <div id="a-timeline"></div>
+      </div>
+      <div id="view-calendar" style="display:none">
+        <div class="cal-nav"><button class="cal-nav-btn" onclick="calPrev()">◀</button><div class="cal-title" id="cal-lbl">—</div><button class="cal-nav-btn" onclick="calNext()">▶</button></div>
+        <div class="cal-grid"><div class="cal-header"><div class="cal-dow">อา</div><div class="cal-dow">จ</div><div class="cal-dow">อ</div><div class="cal-dow">พ</div><div class="cal-dow">พฤ</div><div class="cal-dow">ศ</div><div class="cal-dow">ส</div></div><div class="cal-body" id="cal-body"></div></div>
+      </div>
+      <div id="view-week" style="display:none">
+        <div class="cal-nav"><button class="cal-nav-btn" onclick="weekPrev()">◀</button><div class="cal-title" id="week-lbl">—</div><button class="cal-nav-btn" onclick="weekNext()">▶</button></div>
+        <div class="cal-grid"><div class="cal-header" id="week-hd" style="display:grid;grid-template-columns:repeat(7,1fr)"></div><div class="cal-body" id="week-body" style="display:grid;grid-template-columns:repeat(7,1fr)"></div></div>
+      </div>
+      <div class="sec-label">รายการนัดทั้งหมด</div>
       <div class="filter-bar">
         <input class="search-box" id="a-search" placeholder="ค้นหาชื่อ / ทะเบียน..." oninput="renderApptTable()">
-        <button class="filter-btn active" onclick="setAF('all',this)">ทั้งหมด</button>
-        <button class="filter-btn" onclick="setAF('today',this)">วันนี้</button>
-        <button class="filter-btn" onclick="setAF('Confirmed',this)">ยืนยัน</button>
-        <button class="filter-btn" onclick="setAF('Pending',this)">รอยืนยัน</button>
+        <button class="filter-btn active" onclick="setAFilter('all',this)">ทั้งหมด</button>
+        <button class="filter-btn" onclick="setAFilter('today',this)">วันนี้</button>
+        <button class="filter-btn" onclick="setAFilter('upcoming',this)">กำลังจะมา</button>
+        <button class="filter-btn" onclick="setAFilter('Confirmed',this)">ยืนยัน</button>
+        <button class="filter-btn" onclick="setAFilter('Pending',this)">รอยืนยัน</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>วันที่</th><th>เวลา</th><th>ลูกค้า</th><th>โทร</th><th>ทะเบียน</th><th>บริการ</th><th>สถานะ</th><th>หมายเหตุ</th><th>จัดการ</th></tr></thead><tbody id="appt-table"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>วันที่</th><th>เวลา</th><th>ลูกค้า</th><th>โทร</th><th>ทะเบียน</th><th>รุ่น</th><th>บริการ</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody id="appt-table"></tbody></table></div>
     </div>
 
-    <!-- ===== CUSTOMERS ===== -->
+    <!-- CUSTOMERS -->
     <div class="page" id="page-customers">
-      <div class="ph">
-        <div><h2>👥 ลูกค้า / รถ</h2><p>ข้อมูลลูกค้าและประวัติรถ</p></div>
-        <button class="btn btn-red" onclick="openModal('cust-add')">+ เพิ่มลูกค้า</button>
-      </div>
+      <div class="page-header"><h2>👥 ลูกค้า / รถ</h2><p>ข้อมูลลูกค้าและประวัติรถทุกคัน</p></div>
       <div class="kpi-grid g4">
         <div class="kpi mazda"><div class="lbl">ลูกค้าทั้งหมด</div><div class="val" id="c-total">—</div></div>
         <div class="kpi green"><div class="lbl">Active</div><div class="val" id="c-active">—</div></div>
@@ -337,591 +436,385 @@ textarea{resize:vertical;min-height:80px}
       </div>
       <div class="filter-bar">
         <input class="search-box" id="c-search" placeholder="ค้นหาชื่อ / โทร / ทะเบียน..." oninput="renderCSearch()">
-        <button class="filter-btn active" onclick="setCF('all',this)">ทั้งหมด</button>
-        <button class="filter-btn" onclick="setCF('Active',this)">Active</button>
-        <button class="filter-btn" onclick="setCF('ประจำ',this)">ลูกค้าประจำ</button>
+        <button class="filter-btn active" onclick="setCFilter('all',this)">ทั้งหมด</button>
+        <button class="filter-btn" onclick="setCFilter('Active',this)">Active</button>
+        <button class="filter-btn" onclick="setCFilter('ประจำ',this)">ลูกค้าประจำ</button>
+        <button class="filter-btn" onclick="setCFilter('บริษัท',this)">บริษัท</button>
       </div>
-      <div id="cust-tab-c"><div id="cust-list"></div></div>
-      <div id="cust-tab-v" style="display:none"><div id="car-list"></div></div>
+      <div id="cust-tab-customers"><div id="cust-list"></div></div>
+      <div id="cust-tab-cars" style="display:none"><div id="car-list"></div></div>
     </div>
 
-    <div class="footer" id="footer-ts">
-      <span class="realtime-dot"></span> เชื่อมต่อ Firebase Realtime Database — อัปเดต: <span id="last-update">—</span>
-    </div>
+    <div class="footer" id="footer-ts">อัปเดต: —</div>
   </div>
 </div>
 
-<!-- MODAL CONTAINER -->
-<div class="modal-overlay" id="modal" style="display:none" onclick="if(event.target===this)closeModal()">
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
   <div class="modal-box" onclick="event.stopPropagation()">
-    <div class="modal-hd"><h3 id="modal-title">—</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-hd"><h3 id="modal-title">รายละเอียด</h3><button class="modal-close" onclick="document.getElementById('modal').style.display='none'">✕</button></div>
     <div class="modal-body" id="modal-body"></div>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">—</div>
+<script>
+const API = "https://script.google.com/macros/s/AKfycbwaM8Pcnr2xgOKFoVxvQBf0g3v5rnjkeuO-eILKrGA0pAFXEoHTKSztofBtfvD3fChzeQ/exec";
+const STATUSES = ["รับรถแล้ว","กำลังซ่อม","รอะไหล่","เสร็จแล้ว","พร้อมส่งมอบ","ปิดแล้ว","ยกเลิก"];
+const KCOL = {"รับรถแล้ว":"#1565c0","กำลังซ่อม":"#e65100","รอะไหล่":"#880e4f","เสร็จแล้ว":"#2e7d32","พร้อมส่งมอบ":"#6a1b9a","ปิดแล้ว":"#546e7a","ยกเลิก":"#b71c1c"};
+const MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+const DAYS = ["อา","จ","อ","พ","พฤ","ศ","ส"];
 
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, push, update, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+let finData={}, allJobs=[], allAppts=[], allCustomers=[], allCars=[];
+let jFilter="all", aFilter="all", cFilter="all", cTab="customers";
+let calY, calM, wkStart;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCTl-1ac7ZQoGe77y_ztKvl-dDUUZd-OrE",
-  authDomain: "maztech-garage.firebaseapp.com",
-  databaseURL: "https://maztech-garage-default-rtdb.firebaseio.com",
-  projectId: "maztech-garage",
-  storageBucket: "maztech-garage.firebasestorage.app",
-  messagingSenderId: "112117893617",
-  appId: "1:112117893617:web:c3781d38a430c4e2285c50"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// ===== DATA STORES =====
-let jobs = {}, cashflows = {}, appointments = {}, customers = {}, cars = {};
-let jFilter="all", cfFilter="all", aFilter="all", cFilter="all", cTab="customers";
-let currentModal="", editId="";
-
-// ===== UTILS =====
+// UTILS
 const fmt = n => Number(n||0).toLocaleString("th-TH",{minimumFractionDigits:0,maximumFractionDigits:0})+" ฿";
-const fmtN = n => Number(n||0).toLocaleString("th-TH");
+const fmt2 = n => Number(n||0).toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+" ฿";
+const fmtN = n => Number(n||0).toLocaleString("th-TH",{minimumFractionDigits:0,maximumFractionDigits:0});
 const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
 const get = id => (document.getElementById(id)?.value||"").toLowerCase();
-const todayStr = () => { const n=new Date(); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"); };
-const tomStr = () => { const n=new Date(); n.setDate(n.getDate()+1); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"); };
-const daysDiff = d => { if(!d) return 0; const dt=new Date(d); if(isNaN(dt)) return 0; return Math.floor((new Date()-dt)/86400000); };
-const nowStr = () => new Date().toLocaleString("th-TH",{timeZone:"Asia/Bangkok"});
-const genId = prefix => prefix+"-"+Date.now().toString(36).toUpperCase();
-const thisMonth = () => { const n=new Date(); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0"); };
 
-function showToast(msg, type="success"){
-  const t=document.getElementById("toast");
-  t.textContent=msg; t.className="toast "+type+" show";
-  setTimeout(()=>t.classList.remove("show"),3000);
+function todayStr(){
+  const n=new Date();
+  return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");
+}
+function tomStr(){
+  const n=new Date(); n.setDate(n.getDate()+1);
+  return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");
+}
+function daysDiff(d){
+  if(!d) return 0;
+  const dt=new Date(d); if(isNaN(dt)) return 0;
+  return Math.floor((new Date()-dt)/(86400000));
+}
+function safeDate(d){
+  if(!d||d==="1970-01-01"||d==="") return "-";
+  return d;
+}
+function safeStr(v){
+  if(v===0||v===null||v===undefined) return "";
+  return String(v);
 }
 
-// ===== NAV =====
-const TITLES = {dashboard:"Dashboard",jobs:"งานซ่อม",cashflow:"รายรับ-รายจ่าย",appointments:"ตารางนัดคิว",customers:"ลูกค้า / รถ"};
-window.navTo = page => {
+// NAV
+const PAGE_TITLES = {dashboard:"Dashboard",finance:"การเงิน",jobs:"งานซ่อมทั้งหมด",appointments:"ตารางนัดคิว",customers:"ลูกค้า / รถ"};
+function navTo(page){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
   document.getElementById("page-"+page)?.classList.add("active");
   document.getElementById("nav-"+page)?.classList.add("active");
-  set("page-title",TITLES[page]||page);
-};
-
-// ===== MODAL =====
-window.openModal = (type, id="") => {
-  currentModal=type; editId=id;
-  const overlay=document.getElementById("modal");
-  const titles={
-    "job-add":"เปิดงานซ่อมใหม่","job-edit":"แก้ไขงานซ่อม","job-view":"รายละเอียดงานซ่อม",
-    "cf-add":"บันทึกรายรับ-รายจ่าย","cf-edit":"แก้ไขรายการ",
-    "appt-add":"เพิ่มนัดคิว","appt-edit":"แก้ไขนัดคิว",
-    "cust-add":"เพิ่มลูกค้าใหม่","cust-edit":"แก้ไขข้อมูลลูกค้า","cust-view":"ข้อมูลลูกค้า",
-    "car-add":"เพิ่มรถใหม่","status-update":"อัปเดตสถานะงาน"
-  };
-  set("modal-title", titles[type]||type);
-  document.getElementById("modal-body").innerHTML = buildForm(type, id);
-  overlay.style.display="flex";
-};
-window.closeModal = () => { document.getElementById("modal").style.display="none"; };
-
-function buildForm(type, id=""){
-  if(type==="job-add"||type==="job-edit"){
-    const j = id ? jobs[id] : {};
-    return `<div class="form-grid">
-      <div class="form-group"><label>วันที่รับรถ *</label><input id="f-date" type="date" value="${j.date||todayStr()}" required></div>
-      <div class="form-group"><label>ชื่อลูกค้า *</label><input id="f-cname" placeholder="เช่น คุณสมชาย" value="${j.customerName||""}"></div>
-      <div class="form-group"><label>เบอร์โทร</label><input id="f-phone" placeholder="08x-xxx-xxxx" value="${j.phone||""}"></div>
-      <div class="form-group"><label>ทะเบียนรถ *</label><input id="f-plate" placeholder="เช่น 7กด 3246" value="${j.licensePlate||""}"></div>
-      <div class="form-group"><label>รุ่นรถ</label><input id="f-model" placeholder="เช่น Mazda2 1.5D" value="${j.model||""}"></div>
-      <div class="form-group"><label>เลขไมล์เข้า</label><input id="f-mile" type="number" placeholder="กม." value="${j.mileageIn||""}"></div>
-      <div class="form-group full"><label>อาการ / ปัญหา *</label><textarea id="f-problem" placeholder="อธิบายปัญหาที่ลูกค้าแจ้งมา...">${j.problem||""}</textarea></div>
-      <div class="form-group"><label>สถานะ</label>
-        <select id="f-status">
-          ${["รับรถแล้ว","กำลังซ่อม","รอะไหล่","เสร็จแล้ว","พร้อมส่งมอบ","ปิดแล้ว","ยกเลิก"].map(s=>`<option value="${s}" ${(j.status||"รับรถแล้ว")===s?"selected":""}>${s}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group"><label>ค่าแรง (฿)</label><input id="f-labor" type="number" value="${j.totalLabor||""}"></div>
-      <div class="form-group"><label>ค่าอะไหล่ (฿)</label><input id="f-parts" type="number" value="${j.totalParts||""}"></div>
-      <div class="form-group"><label>ส่วนลด (฿)</label><input id="f-disc" type="number" value="${j.discount||0}"></div>
-      <div class="form-group full"><label>หมายเหตุ</label><textarea id="f-note" placeholder="บันทึกเพิ่มเติม...">${j.note||""}</textarea></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="saveJob('${id}')">💾 บันทึก</button>
-    </div>`;
-  }
-
-  if(type==="status-update"){
-    const j = jobs[id]||{};
-    return `<div style="margin-bottom:16px">
-      <p style="color:#666;font-size:13px;margin-bottom:12px">งาน: <b>${j.jobId||id}</b> | ${j.customerName||"-"} | ${j.licensePlate||"-"}</p>
-      <div class="form-group"><label>สถานะใหม่</label>
-        <select id="f-newstatus" style="font-size:15px;padding:12px">
-          ${["รับรถแล้ว","กำลังซ่อม","รอะไหล่","เสร็จแล้ว","พร้อมส่งมอบ","ปิดแล้ว","ยกเลิก"].map(s=>`<option value="${s}" ${j.status===s?"selected":""}>${s}</option>`).join("")}
-        </select>
-      </div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="updateJobStatus('${id}')">✅ อัปเดตสถานะ</button>
-    </div>`;
-  }
-
-  if(type==="cf-add"||type==="cf-edit"){
-    const c = id ? cashflows[id] : {};
-    return `<div class="form-grid">
-      <div class="form-group"><label>วันที่ *</label><input id="f-date" type="date" value="${c.date||todayStr()}"></div>
-      <div class="form-group"><label>ประเภท *</label>
-        <select id="f-cftype">
-          <option value="รายรับ" ${(c.type||"รายรับ")==="รายรับ"?"selected":""}>รายรับ</option>
-          <option value="รายจ่าย" ${c.type==="รายจ่าย"?"selected":""}>รายจ่าย</option>
-        </select>
-      </div>
-      <div class="form-group"><label>หมวดหมู่</label>
-        <select id="f-cat">
-          ${["รายรับ-ค่าซ่อม","รายรับ-ค่าอะไหล่","รายรับ-อื่นๆ","ค่าอะไหล่-COGS","ค่าเช่า","เงินเดือน","ค่าน้ำ/ไฟ","ค่าใช้จ่ายอื่นๆ","ลงทุน/เครื่องมือ"].map(v=>`<option value="${v}" ${c.category===v?"selected":""}>${v}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group"><label>บัญชี</label>
-        <select id="f-account">
-          <option value="KBank-225" ${(c.account||"KBank-225")==="KBank-225"?"selected":""}>KBank-225 (รายรับ)</option>
-          <option value="KBank-051" ${c.account==="KBank-051"?"selected":""}>KBank-051 (รายจ่าย)</option>
-          <option value="SCB" ${c.account==="SCB"?"selected":""}>SCB (สำรอง)</option>
-          <option value="เงินสด" ${c.account==="เงินสด"?"selected":""}>เงินสด</option>
-        </select>
-      </div>
-      <div class="form-group full"><label>รายละเอียด</label><input id="f-desc" placeholder="รายละเอียดรายการ..." value="${c.description||""}"></div>
-      <div class="form-group"><label>จำนวนเงิน (฿) *</label><input id="f-amount" type="number" placeholder="0" value="${c.amount||""}"></div>
-      <div class="form-group"><label>Job ID (ถ้ามี)</label><input id="f-jobref" placeholder="เช่น JOB-12345" value="${c.jobRef||""}"></div>
-      <div class="form-group full"><label>หมายเหตุ</label><textarea id="f-note" placeholder="บันทึกเพิ่มเติม...">${c.note||""}</textarea></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="saveCashflow('${id}')">💾 บันทึก</button>
-    </div>`;
-  }
-
-  if(type==="appt-add"||type==="appt-edit"){
-    const a = id ? appointments[id] : {};
-    return `<div class="form-grid">
-      <div class="form-group"><label>วันที่นัด *</label><input id="f-date" type="date" value="${a.date||todayStr()}"></div>
-      <div class="form-group"><label>เวลาเริ่ม</label><input id="f-stime" type="time" value="${a.startTime||"09:00"}"></div>
-      <div class="form-group"><label>เวลาเสร็จ</label><input id="f-etime" type="time" value="${a.endTime||"12:00"}"></div>
-      <div class="form-group"><label>สถานะ</label>
-        <select id="f-astatus">
-          ${["Pending","Confirmed","Completed","Cancelled"].map(s=>`<option value="${s}" ${(a.status||"Pending")===s?"selected":""}>${s}</option>`).join("")}
-        </select>
-      </div>
-      <div class="form-group"><label>ชื่อลูกค้า *</label><input id="f-cname" placeholder="ชื่อลูกค้า" value="${a.customerName||""}"></div>
-      <div class="form-group"><label>เบอร์โทร</label><input id="f-phone" placeholder="08x-xxx-xxxx" value="${a.phone||""}"></div>
-      <div class="form-group"><label>ทะเบียนรถ</label><input id="f-plate" placeholder="เช่น 7กด 3246" value="${a.licensePlate||""}"></div>
-      <div class="form-group"><label>รุ่นรถ</label><input id="f-model" placeholder="เช่น Mazda2 1.5D" value="${a.carModel||""}"></div>
-      <div class="form-group full"><label>ประเภทบริการ</label><input id="f-stype" placeholder="เช่น เปลี่ยนถ่ายน้ำมันเครื่อง" value="${a.serviceType||""}"></div>
-      <div class="form-group full"><label>หมายเหตุ</label><textarea id="f-note">${a.note||""}</textarea></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="saveAppt('${id}')">💾 บันทึก</button>
-    </div>`;
-  }
-
-  if(type==="cust-add"||type==="cust-edit"){
-    const c = id ? customers[id] : {};
-    return `<div class="form-grid">
-      <div class="form-group"><label>ชื่อลูกค้า *</label><input id="f-cname" placeholder="ชื่อลูกค้า" value="${c.customerName||""}"></div>
-      <div class="form-group"><label>เบอร์โทร</label><input id="f-phone" value="${c.phone||""}"></div>
-      <div class="form-group"><label>LINE ID</label><input id="f-line" value="${c.lineId||""}"></div>
-      <div class="form-group"><label>ประเภท</label>
-        <select id="f-ctype"><option value="ทั่วไป" ${(c.customerType||"ทั่วไป")==="ทั่วไป"?"selected":""}>ทั่วไป</option><option value="ประจำ" ${c.customerType==="ประจำ"?"selected":""}>ลูกค้าประจำ</option><option value="บริษัท" ${c.customerType==="บริษัท"?"selected":""}>บริษัท</option></select>
-      </div>
-      <div class="form-group full"><label>ที่อยู่</label><textarea id="f-addr">${c.address||""}</textarea></div>
-      <div class="form-group"><label>Tax ID</label><input id="f-tax" value="${c.taxId||""}"></div>
-      <div class="form-group"><label>หมายเหตุ</label><input id="f-note" value="${c.contactNote||""}"></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="saveCustomer('${id}')">💾 บันทึก</button>
-    </div>`;
-  }
-
-  if(type==="car-add"){
-    const custList = Object.entries(customers).map(([k,v])=>`<option value="${k}">${v.customerName||k}</option>`).join("");
-    return `<div class="form-grid">
-      <div class="form-group full"><label>เจ้าของรถ *</label><select id="f-custid"><option value="">-- เลือกลูกค้า --</option>${custList}</select></div>
-      <div class="form-group"><label>ทะเบียน *</label><input id="f-plate" placeholder="เช่น 7กด 3246"></div>
-      <div class="form-group"><label>จังหวัด</label><input id="f-prov" value="กรุงเทพ"></div>
-      <div class="form-group"><label>รุ่นรถ</label><input id="f-model" placeholder="เช่น Mazda2 1.5D"></div>
-      <div class="form-group"><label>สี</label><input id="f-color"></div>
-      <div class="form-group"><label>เชื้อเพลิง</label><select id="f-fuel"><option value="ดีเซล">ดีเซล</option><option value="เบนซิน">เบนซิน</option></select></div>
-      <div class="form-group"><label>เลขไมล์ปัจจุบัน</label><input id="f-mile" type="number" value="0"></div>
-      <div class="form-group"><label>VIN</label><input id="f-vin"></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ยกเลิก</button>
-      <button class="btn btn-red" onclick="saveCar()">💾 บันทึก</button>
-    </div>`;
-  }
-
-  if(type==="cust-view"){
-    const c = customers[id]||{};
-    const cv = Object.values(cars).filter(v=>v.customerId===id);
-    const cj = Object.values(jobs).filter(j=>j.customerId===id).slice(0,5);
-    return `<div class="modal-sec"><div class="modal-sec-title">ข้อมูลลูกค้า</div>
-      <div class="modal-grid">
-        <div class="mf"><div class="ml">ชื่อ</div><div class="mv">${c.customerName||"-"}</div></div>
-        <div class="mf"><div class="ml">โทร</div><div class="mv">${c.phone||"-"}</div></div>
-        <div class="mf"><div class="ml">LINE</div><div class="mv">${c.lineId||"-"}</div></div>
-        <div class="mf"><div class="ml">ประเภท</div><div class="mv">${c.customerType||"-"}</div></div>
-        <div class="mf"><div class="ml">ยอดรวม</div><div class="mv" style="color:#D0021B">${fmtN(c.totalSpend||0)} ฿</div></div>
-        <div class="mf"><div class="ml">เข้าซ่อม</div><div class="mv">${c.totalVisit||0} ครั้ง</div></div>
-      </div>
-    </div>
-    ${cv.length?`<div class="modal-sec"><div class="modal-sec-title">รถ (${cv.length} คัน)</div>
-      ${cv.map(v=>`<div style="background:#f8f9fb;border-radius:8px;padding:10px 12px;margin-bottom:6px"><b>🚗 ${v.licensePlate||"-"}</b> — ${v.model||"-"} | ไมล์ ${fmtN(v.currentMileage||0)} กม.</div>`).join("")}
-    </div>`:""}
-    ${cj.length?`<div class="modal-sec"><div class="modal-sec-title">ประวัติซ่อม</div>
-      ${cj.map(j=>`<div class="hist-item"><div class="hist-dot"></div><div style="flex:1"><div style="font-size:11px;color:#aaa">${j.date||"-"} | ${j.jobId||"-"}</div><div style="font-size:13px;font-weight:600">${j.problem||"-"}</div></div><span class="sbadge s-${j.status||""}">${j.status||""}</span></div>`).join("")}
-    </div>`:""}
-    <div class="form-actions">
-      <button class="btn btn-outline" onclick="closeModal()">ปิด</button>
-      <button class="btn btn-blue" onclick="openModal('cust-edit','${id}')">✏️ แก้ไข</button>
-      <button class="btn btn-red" onclick="openModal('car-add');document.getElementById('f-custid').value='${id}'">+ เพิ่มรถ</button>
-    </div>`;
-  }
-  return "<p>ไม่พบฟอร์ม</p>";
+  set("page-title", PAGE_TITLES[page]||page);
 }
 
-// ===== SAVE FUNCTIONS =====
-window.saveJob = async (id="") => {
-  const val = v => document.getElementById(v)?.value||"";
-  const labor = parseFloat(val("f-labor"))||0;
-  const parts = parseFloat(val("f-parts"))||0;
-  const disc = parseFloat(val("f-disc"))||0;
-  const data = {
-    date: val("f-date"), customerName: val("f-cname"), phone: val("f-phone"),
-    licensePlate: val("f-plate"), model: val("f-model"), mileageIn: parseFloat(val("f-mile"))||0,
-    problem: val("f-problem"), status: val("f-status"),
-    totalLabor: labor, totalParts: parts, discount: disc,
-    total: labor+parts-disc, note: val("f-note"),
-    updatedAt: nowStr()
-  };
-  if(!data.date||!data.customerName||!data.licensePlate||!data.problem){showToast("กรุณากรอกข้อมูลที่จำเป็น","error");return;}
-  try {
-    if(id){ await update(ref(db,`jobs/${id}`),data); showToast("✅ อัปเดตงานซ่อมสำเร็จ"); }
-    else { data.jobId="JOB-"+Date.now().toString(36).toUpperCase(); data.createdAt=nowStr(); await push(ref(db,"jobs"),data); showToast("✅ เปิดงานซ่อมสำเร็จ"); }
-    closeModal();
-  } catch(e){ showToast("❌ บันทึกไม่สำเร็จ: "+e.message,"error"); }
-};
+// FINANCE
+function renderFinance(d){
+  finData = d;
+  set("f-rt",fmt(d.revenueToday)); set("f-et",fmt(d.expenseToday));
+  set("f-rm",fmt(d.revenueMonth)); set("f-em",fmt(d.expenseMonth)); set("f-pm",fmt(d.profitMonth));
+  set("f-b051",fmt2(d.bank051)); set("f-b225",fmt2(d.bank225)); set("f-bscb",fmt2(d.bankSCB)); set("f-btot",fmt2(d.bankTotal));
+  set("f-fc",fmt(d.fixedCost)); set("f-r30",fmt(d.reserve30)); set("f-rdiv",fmt(d.readyDividend));
+  const dp=fmt(d.dividendPerson);
+  ["f-dp1","f-dp2","f-dp3","f-dp4"].forEach(id=>set(id,dp));
+  const pc=document.getElementById("f-pm-card");
+  if(pc) pc.className="kpi "+(d.profitMonth>=0?"green":"red");
+  const be=d.breakEven||68000;
+  const pct=Math.min(Math.round((d.revenueMonth/be)*100),100);
+  set("f-bepct",pct+"%");
+  const bar=document.getElementById("f-bebar");
+  if(bar){bar.style.width=pct+"%";bar.className="prog-fill "+(pct>=100?"fg":pct>=70?"fw":"fr");}
+  const faz=document.getElementById("f-alert");
+  if(faz) faz.innerHTML=d.revenueMonth>=be
+    ?`<div class="alert alert-ok">✅ ผ่าน Break-even แล้ว — รายรับเกินมา ${fmt(d.revenueMonth-be)}</div>`
+    :`<div class="alert alert-warn">⚠️ ยังไม่ถึง Break-even — ต้องการอีก ${fmt(be-d.revenueMonth)}</div>`;
+  // dashboard
+  set("d-bank",fmt(d.bankTotal)); set("d-rev",fmt(d.revenueMonth)); set("d-exp",fmt(d.expenseMonth));
+  set("d-profit",fmt(d.profitMonth)); set("d-fixed",fmt(d.fixedCost)); set("d-res",fmt(d.reserve30));
+  set("d-divr",fmt(d.readyDividend)); set("d-divp",fmt(d.dividendPerson));
+  set("d-b051",fmt2(d.bank051)); set("d-b225",fmt2(d.bank225)); set("d-bscb",fmt2(d.bankSCB)); set("d-btotal",fmt2(d.bankTotal));
+  const daz=document.getElementById("d-alert");
+  if(daz) daz.innerHTML=d.revenueMonth>=be
+    ?`<div class="alert alert-ok">✅ ผ่าน Break-even แล้ว เดือนนี้</div>`
+    :`<div class="alert alert-warn">⚠️ รายรับยังไม่ถึง Break-even — ต้องการอีก ${fmt(be-d.revenueMonth)}</div>`;
+}
 
-window.updateJobStatus = async (id) => {
-  const newStatus = document.getElementById("f-newstatus")?.value;
-  if(!newStatus) return;
-  try {
-    await update(ref(db,`jobs/${id}`),{status:newStatus,updatedAt:nowStr()});
-    showToast("✅ อัปเดตสถานะเป็น: "+newStatus);
-    closeModal();
-  } catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.deleteJob = async (id) => {
-  if(!confirm("ลบงานซ่อมนี้?")) return;
-  try { await remove(ref(db,`jobs/${id}`)); showToast("🗑️ ลบงานซ่อมแล้ว"); }
-  catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.saveCashflow = async (id="") => {
-  const val = v => document.getElementById(v)?.value||"";
-  const data = {
-    date: val("f-date"), type: val("f-cftype"), category: val("f-cat"),
-    account: val("f-account"), description: val("f-desc"),
-    amount: parseFloat(val("f-amount"))||0, jobRef: val("f-jobref"),
-    note: val("f-note"), updatedAt: nowStr()
-  };
-  if(!data.date||!data.amount){showToast("กรุณากรอกวันที่และจำนวนเงิน","error");return;}
-  try {
-    if(id){ await update(ref(db,`cashflows/${id}`),data); showToast("✅ แก้ไขรายการสำเร็จ"); }
-    else { data.createdAt=nowStr(); await push(ref(db,"cashflows"),data); showToast("✅ บันทึกรายการสำเร็จ"); }
-    closeModal();
-  } catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.deleteCashflow = async (id) => {
-  if(!confirm("ลบรายการนี้?")) return;
-  try { await remove(ref(db,`cashflows/${id}`)); showToast("🗑️ ลบรายการแล้ว"); }
-  catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.saveAppt = async (id="") => {
-  const val = v => document.getElementById(v)?.value||"";
-  const data = {
-    date: val("f-date"), startTime: val("f-stime"), endTime: val("f-etime"),
-    status: val("f-astatus"), customerName: val("f-cname"), phone: val("f-phone"),
-    licensePlate: val("f-plate"), carModel: val("f-model"),
-    serviceType: val("f-stype"), note: val("f-note"), updatedAt: nowStr()
-  };
-  if(!data.date||!data.customerName){showToast("กรุณากรอกวันที่และชื่อลูกค้า","error");return;}
-  try {
-    if(id){ await update(ref(db,`appointments/${id}`),data); showToast("✅ แก้ไขนัดสำเร็จ"); }
-    else { data.appointmentId="APT-"+Date.now().toString(36).toUpperCase(); data.createdAt=nowStr(); await push(ref(db,"appointments"),data); showToast("✅ บันทึกนัดสำเร็จ"); }
-    closeModal();
-  } catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.deleteAppt = async (id) => {
-  if(!confirm("ลบนัดนี้?")) return;
-  try { await remove(ref(db,`appointments/${id}`)); showToast("🗑️ ลบนัดแล้ว"); }
-  catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.saveCustomer = async (id="") => {
-  const val = v => document.getElementById(v)?.value||"";
-  const data = {
-    customerName: val("f-cname"), phone: val("f-phone"), lineId: val("f-line"),
-    customerType: val("f-ctype"), address: val("f-addr"), taxId: val("f-tax"),
-    contactNote: val("f-note"), status:"Active", updatedAt: nowStr()
-  };
-  if(!data.customerName){showToast("กรุณากรอกชื่อลูกค้า","error");return;}
-  try {
-    if(id){ await update(ref(db,`customers/${id}`),data); showToast("✅ แก้ไขข้อมูลลูกค้าสำเร็จ"); }
-    else { data.customerId="CUS-"+Date.now().toString(36).toUpperCase(); data.createdAt=nowStr(); data.totalVisit=0; data.totalSpend=0; await push(ref(db,"customers"),data); showToast("✅ เพิ่มลูกค้าสำเร็จ"); }
-    closeModal();
-  } catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-window.saveCar = async () => {
-  const val = v => document.getElementById(v)?.value||"";
-  const custId = val("f-custid");
-  if(!custId||!val("f-plate")){showToast("กรุณาเลือกลูกค้าและกรอกทะเบียน","error");return;}
-  const cust = customers[custId]||{};
-  const data = {
-    customerId: custId, customerName: cust.customerName||"",
-    licensePlate: val("f-plate"), province: val("f-prov"),
-    model: val("f-model"), color: val("f-color"), fuelType: val("f-fuel"),
-    currentMileage: parseInt(val("f-mile"))||0, vin: val("f-vin"),
-    vehicleStatus:"ใช้งาน", createdAt: nowStr()
-  };
-  try { await push(ref(db,"cars"),data); showToast("✅ เพิ่มรถสำเร็จ"); closeModal(); }
-  catch(e){ showToast("❌ "+e.message,"error"); }
-};
-
-// ===== RENDER FUNCTIONS =====
-const KCOL = {"รับรถแล้ว":"#1565c0","กำลังซ่อม":"#e65100","รอะไหล่":"#880e4f","เสร็จแล้ว":"#2e7d32","พร้อมส่งมอบ":"#6a1b9a","ปิดแล้ว":"#546e7a","ยกเลิก":"#b71c1c"};
-const STATUSES = ["รับรถแล้ว","กำลังซ่อม","รอะไหล่","เสร็จแล้ว","พร้อมส่งมอบ","ปิดแล้ว","ยกเลิก"];
-
-function renderJobs(){
-  const arr = Object.entries(jobs).map(([k,v])=>({...v,_id:k}));
-  const tm = thisMonth(); const td = todayStr();
-  const act=arr.filter(j=>["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status)).length;
-  const rdy=arr.filter(j=>["เสร็จแล้ว","พร้อมส่งมอบ"].includes(j.status)).length;
-  const ovd=arr.filter(j=>daysDiff(j.date)>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status)).length;
-  const cls=arr.filter(j=>j.status==="ปิดแล้ว"&&(j.date||"").startsWith(tm)).length;
+// JOBS
+function renderJobKPI(jobs){
+  const td=todayStr(); const tm=new Date().getFullYear()+"-"+String(new Date().getMonth()+1).padStart(2,"0");
+  const act=jobs.filter(j=>["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status)).length;
+  const wait=jobs.filter(j=>j.status==="รอะไหล่").length;
+  const rdy=jobs.filter(j=>["เสร็จแล้ว","พร้อมส่งมอบ"].includes(j.status)).length;
+  const ovd=jobs.filter(j=>daysDiff(j.date)>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status)).length;
+  const cls=jobs.filter(j=>j.status==="ปิดแล้ว"&&(j.date||"").startsWith(tm)).length;
   set("j-act",act); set("j-rdy",rdy); set("j-ovd",ovd); set("j-cls",cls);
-  set("d-jobs",act); set("d-ready",rdy); set("d-over",ovd);
+  set("d-active",act); set("d-wait",wait); set("d-ready",rdy); set("d-over",ovd);
   set("badge-jobs",act);
-  // Kanban
+}
+function renderKanban(jobs){
   const board=document.getElementById("kanban-board"); if(!board) return;
   board.innerHTML=STATUSES.map(s=>{
-    const col=arr.filter(j=>j.status===s);
-    return`<div class="kol"><div class="kol-hd" style="background:${KCOL[s]||"#546e7a"}"><span>${s}</span><span>${col.length}</span></div>
-      <div class="kol-body">${col.map(j=>{
-        const ov=daysDiff(j.date)>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status);
-        return`<div class="jcard${ov?" overdue":""}" style="border-left-color:${KCOL[s]||"#ccc"}" onclick="openModal('status-update','${j._id}')">
-          <div class="jid">${j.jobId||""} ${ov?`<span class="ov-badge">${daysDiff(j.date)}วัน</span>`:""}</div>
-          <div class="jname">${j.customerName||"-"}</div>
-          <div class="jinfo">🚗 ${j.licensePlate||"-"}</div>
-          <div class="jdate">📅 ${j.date||"-"}</div>
-        </div>`;
-      }).join("")||`<div class="empty" style="padding:12px;font-size:11px">ว่าง</div>`}</div></div>`;
-  }).join("");
-  // Recent jobs for dashboard
-  const recent = arr.sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||"")).slice(0,5);
-  const rtbody=document.getElementById("d-job-recent"); if(rtbody) rtbody.innerHTML=recent.map(j=>`<tr><td style="font-size:11px;font-weight:700;color:#0d1b3e">${j.jobId||"-"}</td><td>${j.customerName||"-"}</td><td style="font-weight:700">${j.licensePlate||"-"}</td><td><span class="sbadge s-${j.status||""}">${j.status||"-"}</span></td></tr>`).join("");
-  renderJobTable();
-}
-
-window.renderJobTable = () => {
-  const arr = Object.entries(jobs).map(([k,v])=>({...v,_id:k}));
-  const search=(document.getElementById("j-search")?.value||"").toLowerCase();
-  let jf = window._jFilter||"all";
-  const filtered=arr.filter(j=>{
-    const mf=jf==="all"||j.status===jf;
-    const ms=!search||(j.jobId||"").toLowerCase().includes(search)||(j.customerName||"").toLowerCase().includes(search)||(j.licensePlate||"").toLowerCase().includes(search);
-    return mf&&ms;
-  }).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  const tbody=document.getElementById("job-table"); if(!tbody) return;
-  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="11" class="empty">ไม่พบข้อมูล</td></tr>`;return;}
-  tbody.innerHTML=filtered.map(j=>{
-    const days=daysDiff(j.date); const ov=days>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status);
-    return`<tr><td style="font-weight:700;color:#0d1b3e;font-size:12px">${j.jobId||"-"}</td><td style="font-size:12px">${j.date||"-"}</td><td style="font-weight:600">${j.customerName||"-"}</td><td style="font-size:12px">${j.phone||"-"}</td><td style="font-weight:700">${j.licensePlate||"-"}</td><td style="font-size:12px;color:#666">${j.model||"-"}</td><td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${j.problem||"-"}</td>
-    <td><span class="sbadge s-${j.status||""}" onclick="openModal('status-update','${j._id}')" title="คลิกเพื่ออัปเดตสถานะ">${j.status||"-"}</span></td>
-    <td style="text-align:center;font-weight:700;color:${ov?"#c62828":"#aaa"}">${days>0?days+"d":"-"}</td>
-    <td style="text-align:right;font-weight:700">${j.total?fmtN(j.total):"-"}</td>
-    <td><button class="btn btn-outline btn-sm" onclick="openModal('job-edit','${j._id}')">✏️</button> <button class="btn btn-sm" style="background:#ffebee;color:#c62828;border:1px solid #fca5a5" onclick="deleteJob('${j._id}')">🗑️</button></td></tr>`;
-  }).join("");
-};
-window.setJF = (f,btn) => { window._jFilter=f; document.querySelectorAll("#page-jobs .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderJobTable(); };
-
-function renderCashflow(){
-  const arr = Object.entries(cashflows).map(([k,v])=>({...v,_id:k}));
-  const tm = thisMonth();
-  const rev = arr.filter(a=>a.type==="รายรับ"&&(a.date||"").startsWith(tm)).reduce((s,a)=>s+(a.amount||0),0);
-  const exp = arr.filter(a=>a.type==="รายจ่าย"&&(a.date||"").startsWith(tm)).reduce((s,a)=>s+(a.amount||0),0);
-  const profit = rev-exp; const be=68000;
-  set("cf-rev",fmt(rev)); set("cf-exp",fmt(exp)); set("cf-profit",fmt(profit));
-  set("d-rev",fmt(rev)); set("d-exp",fmt(exp)); set("d-profit",fmt(profit));
-  const pc=document.getElementById("cf-profit-card"); if(pc) pc.className="kpi "+(profit>=0?"green":"red");
-  const pct=Math.min(Math.round((rev/be)*100),100); set("cf-bepct",pct+"%");
-  const bar=document.getElementById("cf-bebar"); if(bar){bar.style.width=pct+"%";bar.className="prog-fill "+(pct>=100?"fg":pct>=70?"fw":"fr");}
-  const az=document.getElementById("cf-alert"); if(az) az.innerHTML=rev>=be?`<div class="alert alert-ok">✅ ผ่าน Break-even แล้ว — รายรับเกินมา ${fmt(rev-be)}</div>`:`<div class="alert alert-warn">⚠️ ยังไม่ถึง Break-even — ต้องการอีก ${fmt(be-rev)}</div>`;
-  const daz=document.getElementById("d-alert"); if(daz) daz.innerHTML=rev>=be?`<div class="alert alert-ok">✅ ผ่าน Break-even แล้ว เดือนนี้</div>`:`<div class="alert alert-warn">⚠️ รายรับยังไม่ถึง Break-even — ต้องการอีก ${fmt(be-rev)}</div>`;
-  renderCFTable();
-}
-window.renderCFTable = () => {
-  const arr=Object.entries(cashflows).map(([k,v])=>({...v,_id:k})).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  const f=window._cfFilter||"all";
-  const filtered=arr.filter(a=>f==="all"||a.type===f);
-  const tbody=document.getElementById("cf-table"); if(!tbody) return;
-  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="7" class="empty">ยังไม่มีรายการ — กด "+ บันทึกรายการ" เพื่อเริ่มต้น</td></tr>`;return;}
-  tbody.innerHTML=filtered.map(c=>`<tr><td style="font-size:12px">${c.date||"-"}</td>
-    <td><span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;${c.type==="รายรับ"?"background:#e8f5e9;color:#2e7d32":"background:#ffebee;color:#c62828"}">${c.type||"-"}</span></td>
-    <td style="font-size:12px;color:#666">${c.category||"-"}</td>
-    <td style="font-size:12px">${c.description||"-"}</td>
-    <td style="font-size:12px;color:#888">${c.account||"-"}</td>
-    <td style="text-align:right;font-weight:700;color:${c.type==="รายรับ"?"#2e7d32":"#c62828"}">${c.type==="รายรับ"?"+":"-"}${fmtN(c.amount||0)}</td>
-    <td><button class="btn btn-outline btn-sm" onclick="openModal('cf-edit','${c._id}')">✏️</button> <button class="btn btn-sm" style="background:#ffebee;color:#c62828;border:1px solid #fca5a5" onclick="deleteCashflow('${c._id}')">🗑️</button></td></tr>`).join("");
-};
-window.setCFF = (f,btn) => { window._cfFilter=f; document.querySelectorAll("#page-cashflow .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderCFTable(); };
-
-function renderAppointments(){
-  const arr=Object.entries(appointments).map(([k,v])=>({...v,_id:k}));
-  const td=todayStr(); const tm=tomStr();
-  set("a-today",arr.filter(a=>a.date===td).length);
-  set("a-tom",arr.filter(a=>a.date===tm).length);
-  set("a-conf",arr.filter(a=>a.status==="Confirmed").length);
-  set("a-pend",arr.filter(a=>a.status==="Pending").length);
-  set("badge-appt",arr.filter(a=>a.date===td).length);
-  set("d-appt",arr.filter(a=>a.date===td).length);
-  // Timeline today
-  const todayAppts=arr.filter(a=>a.date===td).sort((a,b)=>(a.startTime||"").localeCompare(b.startTime||""));
-  const tl=document.getElementById("a-timeline");
-  if(tl) tl.innerHTML=todayAppts.length?todayAppts.map(a=>`<div class="tl-card"><div class="tl-time">${a.startTime||"—"}<br><span style="font-size:10px;color:#aaa">${a.endTime||""}</span></div><div class="tl-div"></div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#0d1b3e">${a.customerName||"-"} <span style="font-size:11px;color:#888;font-weight:400">| ${a.licensePlate||"-"}</span></div><div style="font-size:12px;color:#888;margin-top:2px">🔧 ${a.serviceType||"-"}</div>${a.note?`<div style="font-size:11px;color:#aaa;margin-top:2px">📝 ${a.note}</div>`:""}</div><div style="display:flex;align-items:center;gap:6px"><span class="abadge ab-${a.status||"Pending"}">${a.status||"Pending"}</span><button class="btn btn-outline btn-sm" onclick="openModal('appt-edit','${a._id}')">✏️</button></div></div>`).join(""):`<div class="empty">ไม่มีนัดวันนี้</div>`;
-  // Dashboard
-  const dAppt=document.getElementById("d-appt-today");
-  if(dAppt) dAppt.innerHTML=todayAppts.length?todayAppts.map(a=>`<div class="tl-card" style="margin-bottom:8px"><div class="tl-time" style="min-width:60px;font-size:12px">${a.startTime||"—"}</div><div style="flex:1"><div style="font-size:13px;font-weight:700">${a.customerName||"-"}</div><div style="font-size:11px;color:#888">${a.serviceType||"-"}</div></div><span class="abadge ab-${a.status||"Pending"}">${a.status||""}</span></div>`).join(""):`<div class="empty">ไม่มีนัดวันนี้</div>`;
-  renderApptTable();
-}
-window.renderApptTable = () => {
-  const arr=Object.entries(appointments).map(([k,v])=>({...v,_id:k})).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  const search=(document.getElementById("a-search")?.value||"").toLowerCase();
-  const f=window._aFilter||"all"; const td=todayStr();
-  const filtered=arr.filter(a=>{
-    const mf=f==="all"||(f==="today"&&a.date===td)||(f==="upcoming"&&a.date>td)||a.status===f;
-    const ms=!search||(a.customerName||"").toLowerCase().includes(search)||(a.licensePlate||"").toLowerCase().includes(search);
-    return mf&&ms;
-  });
-  const tbody=document.getElementById("appt-table"); if(!tbody) return;
-  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="9" class="empty">ยังไม่มีนัด — กด "+ เพิ่มนัด" เพื่อเริ่มต้น</td></tr>`;return;}
-  tbody.innerHTML=filtered.map(a=>`<tr style="${a.date===td?"background:#fff9f9":""}"><td style="font-weight:${a.date===td?"700":"400"};color:${a.date===td?"#D0021B":"inherit"}">${a.date||"-"}</td><td style="font-weight:600">${a.startTime||"-"}${a.endTime?" - "+a.endTime:""}</td><td style="font-weight:600">${a.customerName||"-"}</td><td style="font-size:12px">${a.phone||"-"}</td><td style="font-weight:700">${a.licensePlate||"-"}</td><td style="font-size:12px">${a.serviceType||"-"}</td><td><span class="abadge ab-${a.status||"Pending"}">${a.status||"Pending"}</span></td><td style="font-size:11px;color:#888">${a.note||"-"}</td><td><button class="btn btn-outline btn-sm" onclick="openModal('appt-edit','${a._id}')">✏️</button> <button class="btn btn-sm" style="background:#ffebee;color:#c62828;border:1px solid #fca5a5" onclick="deleteAppt('${a._id}')">🗑️</button></td></tr>`).join("");
-};
-window.setAF = (f,btn) => { window._aFilter=f; document.querySelectorAll("#page-appointments .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderApptTable(); };
-
-function renderCustomers(){
-  const custs=Object.entries(customers).map(([k,v])=>({...v,_id:k}));
-  const cvars=Object.entries(cars).map(([k,v])=>({...v,_id:k}));
-  set("c-total",custs.length); set("d-custs",custs.length);
-  set("c-active",custs.filter(c=>c.status==="Active").length);
-  set("c-cars",cvars.length);
-  set("c-spend",fmtN(custs.reduce((s,c)=>s+(c.totalSpend||0),0))+" ฿");
-  renderCSearch();
-}
-window.renderCSearch = () => {
-  const search=(document.getElementById("c-search")?.value||"").toLowerCase();
-  const f=window._cFilter||"all"; const t=window._cTab||"customers";
-  if(t==="customers"){
-    const arr=Object.entries(customers).map(([k,v])=>({...v,_id:k})).filter(c=>c.customerName);
-    const filtered=arr.filter(c=>{
-      const mf=f==="all"||(f==="Active"&&c.status==="Active")||(f==="ประจำ"&&c.customerType==="ประจำ");
-      const ms=!search||(c.customerName||"").toLowerCase().includes(search)||(c.phone||"").includes(search);
-      return mf&&ms;
-    }).sort((a,b)=>(b.totalSpend||0)-(a.totalSpend||0));
-    const el=document.getElementById("cust-list"); if(!el) return;
-    if(!filtered.length){el.innerHTML=`<div class="empty">ยังไม่มีลูกค้า — กด "+ เพิ่มลูกค้า" เพื่อเริ่มต้น</div>`;return;}
-    el.innerHTML=filtered.map(c=>{
-      const carsOfCust=Object.values(cars).filter(v=>v.customerId===c._id);
-      const init=(c.customerName||"?").replace(/คุณ|คุน/g,"").trim().substring(0,2)||"?";
-      return`<div class="cust-card" onclick="openModal('cust-view','${c._id}')">
-        <div class="cust-avatar">${init}</div>
-        <div style="flex:1">
-          <div style="font-size:14px;font-weight:700;color:#0d1b3e">${c.customerName||"-"}</div>
-          <div style="font-size:12px;color:#888;margin-top:2px">📞 ${c.phone||"-"}${c.lineId?" | LINE: "+c.lineId:""}</div>
-          <div style="font-size:12px;color:#888;margin-top:2px">🚗 ${carsOfCust.length} คัน | เข้าซ่อม ${c.totalVisit||0} ครั้ง</div>
-          <div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap">
-            ${c.status==="Active"?'<span class="ctag tag-active">Active</span>':''}
-            ${(c.totalSpend||0)>=50000?'<span class="ctag tag-vip">⭐ VIP</span>':''}
-            ${c.customerType==="บริษัท"?'<span class="ctag tag-biz">บริษัท</span>':''}
-            ${c.customerType==="ประจำ"?'<span class="ctag tag-active">ประจำ</span>':''}
-          </div>
-        </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div style="font-size:14px;font-weight:700;color:#0d1b3e">${fmtN(c.totalSpend||0)} ฿</div>
-          <div style="font-size:10px;color:#aaa">ยอดรวม</div>
-        </div>
+    const col=jobs.filter(j=>j.status===s);
+    const cards=col.map(j=>{
+      const days=daysDiff(j.date); const ov=days>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status);
+      return`<div class="job-card${ov?" overdue":""}" style="border-left-color:${KCOL[s]||"#ccc"}">
+        <div class="jid">${j.jobId||""} ${ov?`<span class="overdue-badge">${days}วัน</span>`:""}</div>
+        <div class="jname">${safeStr(j.customerName)||"-"}</div>
+        <div class="jinfo">🚗 ${safeStr(j.licensePlate)||"-"} ${j.model?"|"+j.model:""}</div>
+        <div class="jdate">📅 ${j.date||"-"}</div>
       </div>`;
     }).join("");
-  } else {
-    const arr=Object.entries(cars).map(([k,v])=>({...v,_id:k}));
-    const filtered=arr.filter(c=>{
-      const ms=!search||(c.licensePlate||"").toLowerCase().includes(search)||(c.customerName||"").toLowerCase().includes(search)||(c.model||"").toLowerCase().includes(search);
-      return ms;
-    }).sort((a,b)=>(b.currentMileage||0)-(a.currentMileage||0));
-    const el=document.getElementById("car-list"); if(!el) return;
-    if(!filtered.length){el.innerHTML=`<div class="empty">ยังไม่มีรถ</div>`;return;}
-    el.innerHTML=filtered.map(c=>`<div class="car-card">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div><div style="font-size:16px;font-weight:700;color:#0d1b3e">🚗 ${c.licensePlate||"ไม่มีทะเบียน"}</div><div style="font-size:12px;color:#666;margin-top:2px">${c.model||"-"}${c.color?" | "+c.color:""}${c.fuelType?" | "+c.fuelType:""}</div></div>
-        <div style="text-align:right"><span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;${c.vehicleStatus==="ใช้งาน"?"background:#e8f5e9;color:#2e7d32":"background:#eceff1;color:#546e7a"}">${c.vehicleStatus||"-"}</span><div style="font-size:11px;color:#888;margin-top:4px">${c.customerName||"-"}</div></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px">
-        <div style="font-size:11px;color:#888">เลขไมล์<b style="display:block;font-size:13px;font-weight:700;color:#0d1b3e;margin-top:1px">${fmtN(c.currentMileage||0)} กม.</b></div>
-        <div style="font-size:11px;color:#888">เซอร์วิสล่าสุด<b style="display:block;font-size:12px;font-weight:700;color:#0d1b3e;margin-top:1px">${c.lastServiceDate||"-"}</b></div>
-        <div style="font-size:11px;color:#888">VIN<b style="display:block;font-size:10px;font-weight:700;color:#0d1b3e;margin-top:1px">${c.vin||"-"}</b></div>
-        <div style="font-size:11px;color:#888">จังหวัด<b style="display:block;font-size:13px;font-weight:700;color:#0d1b3e;margin-top:1px">${c.province||"-"}</b></div>
-      </div>
-    </div>`).join("");
+    return`<div class="kol"><div class="kol-header" style="background:${KCOL[s]||"#546e7a"}"><span>${s}</span><span>${col.length}</span></div><div class="kol-body">${cards||`<div class="empty" style="font-size:11px;padding:12px">ว่าง</div>`}</div></div>`;
+  }).join("");
+}
+function renderJobTable(){
+  const search=get("j-search");
+  const filtered=allJobs.filter(j=>{
+    const mf=jFilter==="all"||j.status===jFilter;
+    const ms=!search||(safeStr(j.jobId)).toLowerCase().includes(search)||(safeStr(j.customerName)).toLowerCase().includes(search)||(safeStr(j.licensePlate)).toLowerCase().includes(search);
+    return mf&&ms;
+  });
+  const tbody=document.getElementById("job-table"); if(!tbody) return;
+  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="10" class="empty">ไม่พบข้อมูล</td></tr>`;return;}
+  tbody.innerHTML=filtered.map(j=>{
+    const days=daysDiff(j.date); const ov=days>3&&["รับรถแล้ว","กำลังซ่อม","รอะไหล่"].includes(j.status);
+    return`<tr><td style="font-weight:700;color:#0d1b3e;font-size:12px">${j.jobId||"-"}</td><td style="font-size:12px;color:#5c6bc0">${j.reNo||"-"}</td><td style="font-size:12px">${j.date||"-"}</td><td style="font-weight:600">${safeStr(j.customerName)||"-"}</td><td style="font-weight:700">${safeStr(j.licensePlate)||"-"}</td><td style="font-size:12px;color:#666">${j.model||"-"}</td><td style="font-size:12px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${j.problem||"-"}</td><td><span class="sbadge s-${j.status||""}">${j.status||"-"}</span></td><td style="text-align:center;font-weight:700;color:${ov?"#c62828":"#aaa"}">${days>0?days+"d":"-"}</td><td style="text-align:right;font-weight:700">${j.total?fmtN(j.total)+" ฿":"-"}</td></tr>`;
+  }).join("");
+}
+function setJFilter(f,btn){ jFilter=f; document.querySelectorAll("#page-jobs .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderJobTable(); }
+
+// APPOINTMENTS
+function renderApptKPI(appts){
+  const td=todayStr(); const tm=tomStr();
+  set("a-today",appts.filter(a=>a.date===td).length);
+  set("a-tom",appts.filter(a=>a.date===tm).length);
+  set("a-conf",appts.filter(a=>a.status==="Confirmed").length);
+  set("a-pend",appts.filter(a=>a.status==="Pending").length);
+  set("badge-appt",appts.filter(a=>a.date===td).length);
+  set("d-appt",appts.filter(a=>a.date===td).length);
+}
+function renderTimeline(appts){
+  const td=todayStr();
+  const today=appts.filter(a=>a.date===td).sort((a,b)=>(a.startTime||"").localeCompare(b.startTime||""));
+  const el=document.getElementById("a-timeline"); if(!el) return;
+  if(!today.length){el.innerHTML=`<div class="no-appt">ไม่มีนัดวันนี้</div>`;return;}
+  el.innerHTML=today.map(a=>`<div class="tl-card"><div class="tl-time">${a.startTime||"—"}<br><span style="font-size:10px;color:#aaa">${a.endTime||""}</span></div><div class="tl-divider"></div><div class="tl-info"><div class="tl-name">${a.customerName||"-"} <span style="font-size:11px;color:#888;font-weight:400">| ${a.licensePlate||"-"}</span></div><div class="tl-detail">🔧 ${a.serviceType||"-"}</div>${a.note?`<div style="font-size:11px;color:#aaa;margin-top:2px">📝 ${a.note}</div>`:""}</div><span class="abadge ab-${a.status||"Pending"}">${a.status||"Pending"}</span></div>`).join("");
+}
+function renderApptTable(){
+  const search=get("a-search"); const td=todayStr();
+  const filtered=allAppts.filter(a=>{
+    let mf=true;
+    if(aFilter==="today") mf=a.date===td;
+    else if(aFilter==="upcoming") mf=a.date>td;
+    else if(aFilter!=="all") mf=a.status===aFilter;
+    const ms=!search||(a.customerName||"").toLowerCase().includes(search)||(a.licensePlate||"").toLowerCase().includes(search);
+    return mf&&ms;
+  }).sort((a,b)=>(a.date+a.startTime).localeCompare(b.date+b.startTime));
+  const tbody=document.getElementById("appt-table"); if(!tbody) return;
+  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="10" class="empty">ไม่พบข้อมูล</td></tr>`;return;}
+  tbody.innerHTML=filtered.map(a=>`<tr><td style="font-size:11px;color:#888">${a.appointmentId||"-"}</td><td style="font-weight:${a.date===td?"700":"400"};color:${a.date===td?"#D0021B":"inherit"}">${a.date||"-"}</td><td style="font-weight:600">${a.startTime||"-"}${a.endTime?" - "+a.endTime:""}</td><td style="font-weight:600">${a.customerName||"-"}</td><td style="font-size:12px">${a.phone||"-"}</td><td style="font-weight:700">${a.licensePlate||"-"}</td><td style="font-size:12px">${a.carModel||"-"}</td><td style="font-size:12px">${a.serviceType||"-"}</td><td><span class="abadge ab-${a.status||"Pending"}">${a.status||"Pending"}</span></td><td style="font-size:11px;color:#888">${a.note||"-"}</td></tr>`).join("");
+}
+function setAFilter(f,btn){ aFilter=f; document.querySelectorAll("#page-appointments .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderApptTable(); }
+function setApptView(v,btn){
+  document.querySelectorAll(".view-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active");
+  document.getElementById("view-timeline").style.display=v==="timeline"?"block":"none";
+  document.getElementById("view-calendar").style.display=v==="calendar"?"block":"none";
+  document.getElementById("view-week").style.display=v==="week"?"block":"none";
+  if(v==="calendar") renderCal(); if(v==="week") renderWeek();
+}
+
+// CALENDAR
+function initCal(){ const n=new Date(); calY=n.getFullYear(); calM=n.getMonth(); wkStart=new Date(n); wkStart.setDate(n.getDate()-n.getDay()); }
+function renderCal(){
+  const first=new Date(calY,calM,1).getDay(); const dim=new Date(calY,calM+1,0).getDate(); const dip=new Date(calY,calM,0).getDate(); const td=todayStr();
+  set("cal-lbl",MONTHS[calM]+" "+(calY+543));
+  let cells="";
+  for(let i=first-1;i>=0;i--) cells+=`<div class="cal-cell other-month"><div class="cal-day-num">${dip-i}</div></div>`;
+  for(let d=1;d<=dim;d++){
+    const ds=calY+"-"+String(calM+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    const isT=ds===td; const aa=allAppts.filter(a=>a.date===ds);
+    let ev=aa.slice(0,3).map(a=>`<div class="cal-ev ev-${a.status||"Pending"}" title="${a.customerName||""} ${a.startTime||""}">${a.startTime||""} ${a.customerName||"-"}</div>`).join("");
+    if(aa.length>3) ev+=`<div class="cal-more">+${aa.length-3}</div>`;
+    cells+=`<div class="cal-cell${isT?" today":""}"><div class="cal-day-num">${d}</div>${ev}</div>`;
   }
-};
-window.setCTab = (t,btn) => { window._cTab=t; document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); document.getElementById("cust-tab-c").style.display=t==="customers"?"block":"none"; document.getElementById("cust-tab-v").style.display=t==="cars"?"block":"none"; renderCSearch(); };
-window.setCF = (f,btn) => { window._cFilter=f; document.querySelectorAll("#page-customers .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderCSearch(); };
+  const rem=(first+dim)%7; if(rem>0) for(let d=1;d<=7-rem;d++) cells+=`<div class="cal-cell other-month"><div class="cal-day-num">${d}</div></div>`;
+  document.getElementById("cal-body").innerHTML=cells;
+}
+function calPrev(){ calM--; if(calM<0){calM=11;calY--;} renderCal(); }
+function calNext(){ calM++; if(calM>11){calM=0;calY++;} renderCal(); }
+function renderWeek(){
+  const td=todayStr(); const days=[];
+  for(let i=0;i<7;i++){const d=new Date(wkStart);d.setDate(wkStart.getDate()+i);const ds=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");days.push({d,ds});}
+  set("week-lbl",days[0].d.getDate()+" "+MONTHS[days[0].d.getMonth()]+" — "+days[6].d.getDate()+" "+MONTHS[days[6].d.getMonth()]+" "+(days[6].d.getFullYear()+543));
+  document.getElementById("week-hd").innerHTML=days.map(({d,ds})=>`<div class="cal-dow" style="${ds===td?"background:#D0021B":""}">${DAYS[d.getDay()]}<br><b>${d.getDate()}</b></div>`).join("");
+  document.getElementById("week-body").innerHTML=days.map(({d,ds})=>{
+    const aa=allAppts.filter(a=>a.date===ds).sort((a,b)=>(a.startTime||"").localeCompare(b.startTime||""));
+    return`<div class="cal-cell${ds===td?" today":""}" style="min-height:120px">${aa.map(a=>`<div class="cal-ev ev-${a.status||"Pending"}">${a.startTime||""} ${a.customerName||"-"}</div>`).join("")||`<div style="font-size:10px;color:#ddd;text-align:center;padding:8px">—</div>`}</div>`;
+  }).join("");
+}
+function weekPrev(){ wkStart.setDate(wkStart.getDate()-7); renderWeek(); }
+function weekNext(){ wkStart.setDate(wkStart.getDate()+7); renderWeek(); }
 
-// ===== FIREBASE REALTIME LISTENERS =====
-onValue(ref(db,"jobs"), snap => {
-  jobs = snap.val()||{};
-  renderJobs();
-  set("last-update", nowStr());
-});
-onValue(ref(db,"cashflows"), snap => {
-  cashflows = snap.val()||{};
-  renderCashflow();
-});
-onValue(ref(db,"appointments"), snap => {
-  appointments = snap.val()||{};
-  renderAppointments();
-});
-onValue(ref(db,"customers"), snap => {
-  customers = snap.val()||{};
-  renderCustomers();
-});
-onValue(ref(db,"cars"), snap => {
-  cars = snap.val()||{};
-  renderCustomers();
-});
+// CUSTOMERS
+function renderCustKPI(custs,cars){
+  set("c-total",custs.length);
+  set("c-active",custs.filter(c=>c.status==="Active").length);
+  set("c-cars",cars.length);
+  set("c-spend",fmtN(custs.reduce((s,c)=>s+(c.totalSpend||0),0))+" ฿");
+}
+function setCTab(tab,btn){
+  cTab=tab;
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active");
+  document.getElementById("cust-tab-customers").style.display=tab==="customers"?"block":"none";
+  document.getElementById("cust-tab-cars").style.display=tab==="cars"?"block":"none";
+  renderCSearch();
+}
+function setCFilter(f,btn){ cFilter=f; document.querySelectorAll("#page-customers .filter-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderCSearch(); }
+function renderCSearch(){
+  const search=get("c-search");
+  if(cTab==="customers") renderCustList(search);
+  else renderCarList(search);
+}
+function getInit(name){
+  if(!name||name===0) return "?";
+  const n=String(name).replace("คุณ","").replace("คุน","").trim();
+  return n.substring(0,2)||"?";
+}
+function renderCustList(search=""){
+  const filtered=allCustomers.filter(c=>{
+    const name=safeStr(c.customerName);
+    const mf=cFilter==="all"||(cFilter==="Active"&&c.status==="Active")||(cFilter==="ประจำ"&&c.customerType==="ประจำ")||(cFilter==="บริษัท"&&c.customerType==="บริษัท");
+    const ms=!search||name.toLowerCase().includes(search)||(c.phone||"").includes(search)||(c.customerId||"").toLowerCase().includes(search);
+    return mf&&ms&&(name||c.phone);
+  }).sort((a,b)=>(b.totalSpend||0)-(a.totalSpend||0));
+  const el=document.getElementById("cust-list"); if(!el) return;
+  if(!filtered.length){el.innerHTML=`<div class="empty">ไม่พบลูกค้า</div>`;return;}
+  el.innerHTML=filtered.map(c=>{
+    const name=safeStr(c.customerName)||"-";
+    const cars=allCars.filter(v=>v.customerId===c.customerId);
+    const isVip=(c.totalSpend||0)>=50000;
+    return`<div class="cust-card" onclick="openCustModal('${c.customerId}')">
+      <div class="cust-avatar">${getInit(c.customerName)}</div>
+      <div style="flex:1">
+        <div class="cust-name">${name}</div>
+        <div class="cust-meta">📞 ${c.phone||"-"}${c.lineId?" | LINE: "+c.lineId:""}</div>
+        <div class="cust-meta">🚗 ${cars.length} คัน | เข้าซ่อม ${c.totalVisit||0} ครั้ง | ล่าสุด ${safeDate(c.lastVisitDate)}</div>
+        <div class="cust-tags">
+          ${c.status==="Active"?'<span class="ctag tag-active">Active</span>':''}
+          ${isVip?'<span class="ctag tag-vip">⭐ VIP</span>':''}
+          ${c.customerType==="บริษัท"?'<span class="ctag tag-biz">บริษัท</span>':''}
+          ${c.customerType==="ประจำ"?'<span class="ctag tag-active">ประจำ</span>':''}
+        </div>
+      </div>
+      <div class="cust-right">
+        <div class="cust-spend">${fmtN(c.totalSpend||0)} ฿</div>
+        <div class="cust-visit">ยอดรวม</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+function renderCarList(search=""){
+  const filtered=allCars.filter(c=>{
+    const plate=safeStr(c.licensePlate); const name=safeStr(c.customerName);
+    return !search||plate.toLowerCase().includes(search)||name.toLowerCase().includes(search)||(c.model||"").toLowerCase().includes(search);
+  }).sort((a,b)=>(b.currentMileage||0)-(a.currentMileage||0));
+  const el=document.getElementById("car-list"); if(!el) return;
+  if(!filtered.length){el.innerHTML=`<div class="empty">ไม่พบรถ</div>`;return;}
+  el.innerHTML=filtered.map(c=>`<div class="car-card" onclick="openCarModal('${c.vehicleId}')">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="car-plate">🚗 ${safeStr(c.licensePlate)||"ไม่มีทะเบียน"}</div><div class="car-model">${c.model||"-"}${c.color?" | "+c.color:""}${c.fuelType?" | "+c.fuelType:""}</div></div>
+      <div style="text-align:right"><span class="cstatus ${c.vehicleStatus==="ใช้งาน"?"cs-on":"cs-off"}">${c.vehicleStatus||"-"}</span><div style="font-size:11px;color:#888;margin-top:4px">${safeStr(c.customerName)||"-"}</div></div>
+    </div>
+    <div class="car-details">
+      <div class="car-di">เลขไมล์<b>${fmtN(c.currentMileage||0)} กม.</b></div>
+      <div class="car-di">เซอร์วิสล่าสุด<b>${safeDate(c.lastServiceDate)}</b></div>
+      <div class="car-di">VIN<b style="font-size:10px">${c.vin||"-"}</b></div>
+      <div class="car-di">จังหวัด<b>${c.province||"-"}</b></div>
+    </div>
+  </div>`).join("");
+}
+function openCustModal(custId){
+  const c=allCustomers.find(x=>x.customerId===custId); if(!c) return;
+  const cars=allCars.filter(v=>v.customerId===custId);
+  const jobs=allJobs.filter(j=>j.custId===custId);
+  set("modal-title",safeStr(c.customerName)||"ลูกค้า");
+  document.getElementById("modal-body").innerHTML=`
+    <div class="modal-sec"><div class="modal-sec-title">ข้อมูลลูกค้า</div>
+      <div class="modal-grid">
+        <div class="mf"><div class="ml">Customer ID</div><div class="mv">${c.customerId||"-"}</div></div>
+        <div class="mf"><div class="ml">ชื่อ</div><div class="mv">${safeStr(c.customerName)||"-"}</div></div>
+        <div class="mf"><div class="ml">โทรศัพท์</div><div class="mv">${c.phone||"-"}</div></div>
+        <div class="mf"><div class="ml">LINE ID</div><div class="mv">${c.lineId||"-"}</div></div>
+        <div class="mf"><div class="ml">ประเภท</div><div class="mv">${c.customerType||"-"}</div></div>
+        <div class="mf"><div class="ml">สถานะ</div><div class="mv">${c.status||"-"}</div></div>
+        <div class="mf"><div class="ml">เข้าครั้งแรก</div><div class="mv">${safeDate(c.firstVisitDate)}</div></div>
+        <div class="mf"><div class="ml">เข้าล่าสุด</div><div class="mv">${safeDate(c.lastVisitDate)}</div></div>
+        <div class="mf"><div class="ml">จำนวนครั้ง</div><div class="mv">${c.totalVisit||0} ครั้ง</div></div>
+        <div class="mf"><div class="ml">ยอดรวม</div><div class="mv" style="color:#D0021B">${fmtN(c.totalSpend||0)} ฿</div></div>
+      </div>
+      ${c.address?`<div class="mf" style="margin-top:8px"><div class="ml">ที่อยู่</div><div class="mv">${c.address}</div></div>`:""}
+    </div>
+    ${cars.length?`<div class="modal-sec"><div class="modal-sec-title">รถของลูกค้า (${cars.length} คัน)</div>
+      ${cars.map(v=>`<div style="background:#f8f9fb;border-radius:8px;padding:10px 12px;margin-bottom:6px"><div style="font-weight:700;color:#0d1b3e">🚗 ${safeStr(v.licensePlate)||"ไม่มีทะเบียน"} — ${v.model||"-"}</div><div style="font-size:12px;color:#888;margin-top:3px">ไมล์ ${fmtN(v.currentMileage||0)} กม. | เซอร์วิสล่าสุด ${safeDate(v.lastServiceDate)} | ${v.fuelType||"-"}</div></div>`).join("")}
+    </div>`:""}
+    ${jobs.length?`<div class="modal-sec"><div class="modal-sec-title">ประวัติซ่อม (${Math.min(jobs.length,5)} รายการล่าสุด)</div>
+      ${jobs.slice(0,5).map(j=>`<div class="hist-item"><div class="hist-dot"></div><div class="hist-info"><div class="hist-date">${j.date||"-"} | ${j.jobId||"-"}</div><div class="hist-desc">${j.problem||"-"} <span class="sbadge s-${j.status||""}">${j.status||""}</span></div></div><div class="hist-amt">${j.total?fmtN(j.total)+" ฿":""}</div></div>`).join("")}
+    </div>`:""}`;
+  document.getElementById("modal").style.display="flex";
+}
+function openCarModal(vid){
+  const v=allCars.find(x=>x.vehicleId===vid); if(!v) return;
+  const jobs=allJobs.filter(j=>safeStr(j.licensePlate)===safeStr(v.licensePlate)&&safeStr(v.licensePlate));
+  set("modal-title",safeStr(v.licensePlate)+" — "+v.model);
+  document.getElementById("modal-body").innerHTML=`
+    <div class="modal-sec"><div class="modal-sec-title">ข้อมูลรถ</div>
+      <div class="modal-grid">
+        <div class="mf"><div class="ml">ทะเบียน</div><div class="mv" style="font-size:18px;color:#D0021B">${safeStr(v.licensePlate)||"ไม่มีทะเบียน"}</div></div>
+        <div class="mf"><div class="ml">รุ่น</div><div class="mv">${v.model||"-"}</div></div>
+        <div class="mf"><div class="ml">สี</div><div class="mv">${v.color||"-"}</div></div>
+        <div class="mf"><div class="ml">เชื้อเพลิง</div><div class="mv">${v.fuelType||"-"}</div></div>
+        <div class="mf"><div class="ml">เลขไมล์</div><div class="mv">${fmtN(v.currentMileage||0)} กม.</div></div>
+        <div class="mf"><div class="ml">เซอร์วิสล่าสุด</div><div class="mv">${safeDate(v.lastServiceDate)}</div></div>
+        <div class="mf"><div class="ml">VIN</div><div class="mv" style="font-size:11px">${v.vin||"-"}</div></div>
+        <div class="mf"><div class="ml">จังหวัด</div><div class="mv">${v.province||"-"}</div></div>
+      </div>
+      <div class="mf" style="margin-top:8px"><div class="ml">เจ้าของ</div><div class="mv">👤 ${safeStr(v.customerName)||"-"} | 📞 ${v.phone||"-"}</div></div>
+    </div>
+    ${jobs.length?`<div class="modal-sec"><div class="modal-sec-title">ประวัติซ่อม (${Math.min(jobs.length,8)} รายการ)</div>
+      ${jobs.slice(0,8).map(j=>`<div class="hist-item"><div class="hist-dot"></div><div class="hist-info"><div class="hist-date">${j.date||"-"} | ${j.jobId||"-"}</div><div class="hist-desc">${j.problem||"-"} <span class="sbadge s-${j.status||""}">${j.status||""}</span></div></div><div class="hist-amt">${j.total?fmtN(j.total)+" ฿":""}</div></div>`).join("")}
+    </div>`:"<div class='modal-sec'><div class='modal-sec-title'>ประวัติซ่อม</div><div class='empty'>ยังไม่มีประวัติซ่อม</div></div>"}`;
+  document.getElementById("modal").style.display="flex";
+}
 
+// LOAD
+function loadAll(){
+  document.getElementById("err-zone").innerHTML="";
+  // Finance
+  fetch(API).then(r=>r.json()).then(d=>{renderFinance(d);set("footer-ts","อัปเดต: "+(d.updatedAt||"-"));}).catch(()=>{document.getElementById("err-zone").innerHTML+='<div class="err">❌ โหลดข้อมูลการเงินไม่สำเร็จ</div>';});
+  // Jobs
+  fetch(API+"?type=jobs").then(r=>r.json()).then(d=>{allJobs=d.jobs||[];renderJobKPI(allJobs);renderKanban(allJobs);renderJobTable();}).catch(()=>{});
+  // Appointments
+  fetch(API+"?type=appointments").then(r=>r.json()).then(d=>{allAppts=d.appointments||[];renderApptKPI(allAppts);renderTimeline(allAppts);renderApptTable();}).catch(()=>{});
+  // Customers
+  fetch(API+"?type=customers").then(r=>r.json()).then(d=>{
+    allCustomers=(d.customers||[]).filter(c=>safeStr(c.customerName)||c.phone);
+    allCars=(d.cars||[]).filter(c=>c.vehicleId);
+    renderCustKPI(allCustomers,allCars);
+    renderCustList();
+  }).catch(e=>{console.error("customers error:",e);document.getElementById("err-zone").innerHTML+='<div class="err">❌ โหลดข้อมูลลูกค้าไม่สำเร็จ</div>';});
+}
+
+// INIT
+function init(){
+  const n=new Date();
+  const days=["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์"];
+  const months=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+  set("today-date",`${days[n.getDay()]}. ${n.getDate()} ${months[n.getMonth()]} ${n.getFullYear()+543}`);
+  set("dash-sub",`ภาพรวมงานซ่อม รายรับรายจ่าย และสถานะงานวันนี้ — ${days[n.getDay()]}ที่ ${n.getDate()} ${months[n.getMonth()]} ${n.getFullYear()+543}`);
+  initCal();
+  loadAll();
+  setInterval(loadAll,5*60*1000);
+}
+// Topbar add button
 window.tbAdd = () => {
   const p = document.querySelector(".nav-item.active")?.id?.replace("nav-","");
   if(p==="jobs") openJobForm();
@@ -929,21 +822,15 @@ window.tbAdd = () => {
   else if(p==="customers") openCustForm();
   else if(p==="cashflow") openCashForm();
 };
-const _nav = window.navTo;
+const _navOrig = window.navTo;
 window.navTo = p => {
-  _nav(p);
+  _navOrig(p);
   const lbl={jobs:"+ เปิดงานใหม่",appointments:"+ เพิ่มนัด",customers:"+ เพิ่มลูกค้า",cashflow:"+ บันทึกรายการ"};
   const btn=document.getElementById("tb-add");
-  if(btn){btn.style.display=lbl[p]?"block":"none";btn.textContent=lbl[p]||"+ เพิ่ม";}
+  if(btn){btn.style.display=lbl[p]?"inline-block":"none";btn.textContent=lbl[p]||"+ เพิ่ม";}
 };
-// ===== INIT =====
-window.loadAll = () => {}; // handled by onValue listeners
-const n=new Date();
-const daysTH=["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์"];
-const monthsTH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
-set("today-date",`${daysTH[n.getDay()]}. ${n.getDate()} ${monthsTH[n.getMonth()]} ${n.getFullYear()+543}`);
-set("dash-sub",`ภาพรวมงานซ่อม รายรับรายจ่าย และสถานะงานวันนี้ — ${daysTH[n.getDay()]}ที่ ${n.getDate()} ${monthsTH[n.getMonth()]} ${n.getFullYear()+543}`);
-if(window.innerWidth<=768) { document.getElementById("menu-btn").style.display="block"; }
+
+init();
 </script>
 </body>
 </html>
